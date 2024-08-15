@@ -2,7 +2,7 @@
 
 Welcome to the public website of the Technische Universität Darmstadt Space Technology (TUDSaT). This project is built using [Next.js](https://nextjs.org/) and powered by [Bun](https://bun.sh/), [Prismic](https://prismic.io/) as the CMS, and styled with [TailwindCSS](https://tailwindcss.com/) and [Shadcn/ui](https://ui.shadcn.com/). The website serves to showcase our projects, events, and team members.
 
-![Screenshot of the Website](public\preview.png)
+![Screenshot of the Website](./public/preview.png)
 
 ## Table of Contents
 
