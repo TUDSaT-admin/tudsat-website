@@ -1,43 +1,205 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TUDSaT Public Website
 
-## Getting Started
+Welcome to the public website of the Technische Universität Darmstadt Space Technology (TUDSaT). This project is built using [Next.js](https://nextjs.org/) and powered by [Bun](https://bun.sh/), [Prismic](https://prismic.io/) as the CMS, and styled with [TailwindCSS](https://tailwindcss.com/) and [Shadcn/ui](https://ui.shadcn.com/). The website serves to showcase our projects, events, and team members.
 
-Install Nodejs
+![Screenshot of the Website](public\preview.png)
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Scripts](#scripts)
+- [Technologies Used](#technologies-used)
+- [Project Structure](#project-structure)
+- [Prismic & Slices](#prismic--slices)
+- [Deployment](#deployment)
+- [Contribution Guidelines](#contribution-guidelines)
+- [Contact](#contact)
+
+## Installation
+
+To run this project locally, ensure you have [Node.js](https://nodejs.org/en/) installed. We recommend using a Node version manager like [nvm](https://github.com/nvm-sh/nvm) or [fnm](https://github.com/Schniz/fnm) for managing your Node.js versions.
+
+### Steps:
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/TUDSaT-admin/tudsat-website
+    cd tudsat-website
+    ```
+
+2. Install Node.js and Bun:
+    - First, ensure Node.js is installed (you can check with `node -v`).
+    - Install [Bun](https://bun.sh/):
+      ```bash
+      curl -fsSL https://bun.sh/install | bash
+      ```
+
+3. Install dependencies using Bun:
+    ```bash
+    bun install
+    ```
+
+4. Start the development server, including Prismic Slice Machine:
+    ```bash
+    bun dev
+    ```
+
+The website will be available at `http://localhost:3000`, and the Prismic Slice Machine will be available for managing slices.
+
+## Scripts
+
+Here are the key scripts you can run:
+
+- **Development**:
+    ```bash
+    bun dev
+    ```
+    Runs the development server for the website and launches the Prismic Slice Machine.
+
+- **Build**:
+    ```bash
+    bun build
+    ```
+    Builds the application for production.
+
+- **Start**:
+    ```bash
+    bun start
+    ```
+    Starts the production build.
+
+- **Lint**:
+    ```bash
+    bun lint
+    ```
+    Runs ESLint to check for code issues.
+
+- **Format**:
+    ```bash
+    bun format
+    ```
+    Formats the code using [Biome](https://biomejs.dev/).
+
+- **Slice Machine**:
+    ```bash
+    bun slicemachine
+    ```
+    Starts the Prismic Slice Machine independently.
+
+## Technologies Used
+
+- **[Next.js](https://nextjs.org/)**: React framework for server-side rendering and static site generation.
+- **[Bun](https://bun.sh/)**: A fast all-in-one JavaScript runtime.
+- **[TailwindCSS](https://tailwindcss.com/)**: A utility-first CSS framework for building custom designs.
+  - Example usage in the project:
+    ```jsx
+    <div className="text-center text-white bg-blue-500 p-4">
+      Welcome to TUDSaT!
+    </div>
+    ```
+  - For more details, visit the [TailwindCSS documentation](https://tailwindcss.com/docs).
+
+- **[Shadcn/ui](https://ui.shadcn.com/)**: ShadCN provides reusable and accessible UI components styled with TailwindCSS. Our basic UI building blocks are organized under the `ui` folder.
+  
+- **[Prismic](https://prismic.io/)**: A headless CMS that allows for content modeling and integration.
+  - Example usage in the project:
+    ```javascript
+    import { createClient } from '../prismicio';
+
+    const client = createClient();
+    const doc = await client.getByUID('page', 'homepage');
+    ```
+  - For more, see the [Prismic documentation](https://prismic.io/docs).
+
+## Project Structure
+
+The project follows a structured layout for better scalability and organization. Here's an overview of the key directories and files:
+
+- **`src/`**: Contains the main application code.
+  - **`app/`**: Contains the main pages, layouts, and APIs.
+    - **`[uid]/`**: Dynamic routes for Prismic documents.
+    - **`slice-simulator/`**: Related to the Slice Machine.
+    - **`globals.css`**: Global CSS styles.
+    - **`layout.tsx`**: Main layout component.
+    - **`page.tsx`**: The homepage component.
+  - **`components/`**: Contains custom React components used throughout the project.
+    - **`ui/`**: Contains reusable UI components built with [Shadcn/ui](https://ui.shadcn.com/) (e.g., button, card, dialog).
+    - **`slices/`**: Important! This is where we define Prismic slices, which are individual sections of a page. These are generated from the Prismic Slice Machine and then customized in code.
+  - **`lib/`**: Contains helper functions and utilities.
+  - **`hooks/`**: Contains custom hooks used throughout the project.
+  - **`config/`**: Configuration files for the website.
+  - **`public/`**: Static assets such as images and icons.
+
+### Prismic & Slices
+
+This project relies heavily on Prismic's [Slice Machine](https://prismic.io/docs/technologies/slice-machine), a tool that allows you to create and manage dynamic content slices.
+
+#### Slices
+
+**Slices** are reusable sections of a page, allowing you to build dynamic and flexible UIs. Each slice corresponds to a section of content, such as a "hero section" or "testimonial section". In our project, slices are located in the `slices/` folder and are created using the Prismic Slice Machine.
+
+Slices are first added via the Slice Machine UI, then customized directly in the code.
+
+#### Slice Machine
+
+The **Slice Machine** is a UI tool integrated into our development process that allows us to create and manage slices within Prismic.
+
+To work with the Slice Machine, follow these steps:
+
+1. Start the Slice Machine:
+    ```bash
+    bun dev
+    ```
+2. Open the Slice Machine at `http://localhost:9999` to manage and create slices.
+3. After creating a new slice, you'll find it in the `slices/` directory. Customize its React component as needed to fit the website design.
+
+For more information on how to create and customize slices, refer to the [official Slice Machine documentation](https://prismic.io/docs/technologies/slice-machine).
+
+## Deployment
+
+The project is continuously deployed on [Vercel](https://vercel.com/).
+
+- Public URL: [https://tudsat.space](https://tudsat.space)
+- After every push to the main branch, the site is automatically redeployed.
+
+For more information on how to deploy Next.js apps to Vercel, check the [official Vercel docs](https://vercel.com/docs/concepts/deployments).
+
+## Contribution Guidelines
+
+We welcome contributions from everyone! Please follow these guidelines:
+
+### Installing Recommended Extensions
+
+To ensure the development environment is set up properly, it's important to install the recommended workspace extensions in VS Code:
+- Open the **Extensions** tab in VS Code.
+- In the search bar, type `@recommended` to view and install the recommended extensions (e.g., Biome, Tailwind CSS IntelliSense, GitLens, etc.).
+
+### Code Formatting with Biome
+
+We use [Biome](https://biomejs.dev/) to format the code. To maintain consistency and cleanliness in the codebase:
+- **Enable Format on Save**: 
+    - Go to VS Code settings (`Ctrl + ,`).
+    - Search for "Format on Save" and enable it. This will automatically format the code whenever you save a file.
+
+> **Note**: You can also manually format the code before pushing any changes by running:
+```bash
+bun format
 ```
-https://nodejs.org/en/download
-```
 
-Clone Repo (Install git if not already)
-```
-git clone https://github.com/IhsenBouallegue/tudsat
-```
+### Deployment
 
-Enable the use of the Yarn package manager 
-```
-corepack enable
-```
+Every push to the repository will trigger an automatic deployment to Vercel. Be cautious when pushing code, as the live site will update with every commit.
 
-Install all dependencies (then you only need this when the dependencies in package.json are updated)
-```
-yarn install
-```
+For more detailed deployment instructions, refer to [Vercel's documentation](https://vercel.com/docs/concepts/deployments).
 
-Start development server
-```
-yarn dev
-```
+## Contact
 
-## Learn More
+If you have any questions or need further assistance, feel free to reach out to us at:
 
-To learn more about Next.js, take a look at the following resources:
+**Email**: [vorstand@tudsat.space](mailto:vorstand@tudsat.space)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is licensed under the MIT License.
