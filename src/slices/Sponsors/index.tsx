@@ -97,9 +97,26 @@ const SponsorCarousel = ({
   sponsors,
 }: { sponsors: Content.SponsorsDocumentDataSponsorsItem[] }) => {
   return (
-    <div className="relative">
+    <div className="relative max-w-[100vw] w-full flex-col items-center justify-center overflow-hidden">
       <Marquee pauseOnHover>
-        {sponsors.map((sponsor) => (
+        {sponsors.slice(0, sponsors.length / 2).map((sponsor) => (
+          <div
+            className="flex items-center justify-center max-w-52"
+            style={{ boxSizing: "border-box" }}
+            key={sponsor.name}
+          >
+            <PrismicNextLink field={sponsor.link}>
+              <PrismicNextImage
+                field={sponsor.logo}
+                className="object-contain h-20 w-auto bg-slate-300/10 p-4 rounded-md hover:bg-slate-300/40 transition-colors duration-300"
+                style={{ filter: "drop-shadow(-3px -3px 6px rgba(255,255,255,0.2))" }}
+              />
+            </PrismicNextLink>
+          </div>
+        ))}
+      </Marquee>
+      <Marquee reverse>
+        {sponsors.slice(sponsors.length / 2).map((sponsor) => (
           <div
             className="flex items-center justify-center max-w-52"
             style={{ boxSizing: "border-box" }}

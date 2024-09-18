@@ -15,14 +15,14 @@ export default function Marquee({
   pauseOnHover = false,
   children,
   vertical = false,
-  repeat = 1,
+  repeat = 4,
   ...props
 }: MarqueeProps & React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       {...props}
       className={cn(
-        "group flex overflow-hidden p-2 [--duration:40s] [--gap:1rem] [gap:var(--gap)]",
+        "group flex overflow-hidden p-2 [--duration:60s] [--gap:1rem] [gap:var(--gap)]",
         {
           "flex-row": !vertical,
           "flex-col": vertical,
