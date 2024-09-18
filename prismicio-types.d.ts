@@ -5,6 +5,83 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
+ * Content for Announcement documents
+ */
+interface AnnouncementDocumentData {
+  /**
+   * Title field in *Announcement*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *Announcement*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Active field in *Announcement*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: announcement.active
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  active: prismic.BooleanField;
+
+  /**
+   * Activation Date field in *Announcement*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.activation_date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  activation_date: prismic.DateField;
+
+  /**
+   * Expiry Date field in *Announcement*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.expiry_date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  expiry_date: prismic.DateField;
+}
+
+/**
+ * Announcement document from Prismic
+ *
+ * - **API ID**: `announcement`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AnnouncementDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<AnnouncementDocumentData>,
+    "announcement",
+    Lang
+  >;
+
+/**
  * Item in *Footer → navigation*
  */
 export interface FooterDocumentDataNavigationItem {
@@ -562,6 +639,7 @@ export type TeamMembersDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
+  | AnnouncementDocument
   | FooterDocument
   | HeaderDocument
   | HomeDocument
@@ -1836,6 +1914,8 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      AnnouncementDocument,
+      AnnouncementDocumentData,
       FooterDocument,
       FooterDocumentData,
       FooterDocumentDataNavigationItem,
