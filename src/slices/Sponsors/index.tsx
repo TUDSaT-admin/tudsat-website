@@ -1,22 +1,13 @@
 "use client";
 
 import Bounded from "@/components/bounded";
+import Marquee from "@/components/ui/marquee";
 import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-  CarouselApi,
-} from "@/components/ui/carousel";
 import { createClient } from "@/prismicio";
 import { Content } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
-import Autoplay from "embla-carousel-autoplay";
-import { ReactNode, useEffect, useState } from "react";
-import AutoScroll from "embla-carousel-auto-scroll";
+import { ReactNode } from "react";
 /**
  * Props for `Sponsors`.
  */
@@ -106,41 +97,27 @@ const SponsorCarousel = ({
   sponsors,
 }: { sponsors: Content.SponsorsDocumentDataSponsorsItem[] }) => {
   return (
-    <Carousel
-      plugins={[
-        AutoScroll({
-          speed: 1,
-        }),
-      ]}
-      opts={{
-        align: "start",
-        loop: true,
-        dragFree: true,
-      }}
-      className="w-full"
-      style={{
-        maskImage: `linear-gradient(to right, transparent, rgba(0,0,0,1.0) 30px, rgba(0,0,0,0.5) 90%, transparent 100%),
-          linear-gradient(to left, transparent, rgba(0,0,0,1.0) 30px, rgba(0,0,0,0.5) 90%, transparent 100%)`,
-      }}
-    >
-      <CarouselContent className="-ml-1">
+    <div className="relative">
+      <Marquee pauseOnHover>
         {sponsors.map((sponsor) => (
-          <CarouselItem
-            className="basis-1/2 md:basis-1/4 lg:basis-1/6 flex items-center justify-center"
+          <div
+            className="flex items-center justify-center max-w-52"
             style={{ boxSizing: "border-box" }}
             key={sponsor.name}
           >
             <PrismicNextLink field={sponsor.link}>
               <PrismicNextImage
                 field={sponsor.logo}
-                className="object-contain h-20 w-auto"
-                style={{ filter: "drop-shadow(-3px -3px 8px rgba(255,255,255,0.3))" }}
+                className="object-contain h-20 w-auto bg-slate-300/10 p-4 rounded-md hover:bg-slate-300/40 transition-colors duration-300"
+                style={{ filter: "drop-shadow(-3px -3px 6px rgba(255,255,255,0.2))" }}
               />
             </PrismicNextLink>
-          </CarouselItem>
+          </div>
         ))}
-      </CarouselContent>
-    </Carousel>
+      </Marquee>
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-60 bg-gradient-to-r from-white dark:from-background" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background" />
+    </div>
   );
 };
 

@@ -7,7 +7,7 @@ import { Content, ImageFieldImage, KeyTextField } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import Autoplay from "embla-carousel-autoplay";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Props for `Testemonials`.
@@ -31,6 +31,7 @@ const Testemonials = ({ slice }: TestemonialsProps): JSX.Element => {
     });
   }, [api]);
 
+  const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -41,11 +42,7 @@ const Testemonials = ({ slice }: TestemonialsProps): JSX.Element => {
       <div className="absolute bg-gradient-to-l from-primary to-transparent to-60% inset-0 -z-10 opacity-60" />
       <Carousel
         setApi={setApi}
-        plugins={[
-          Autoplay({
-            delay: 5000,
-          }),
-        ]}
+        plugins={[plugin.current]}
         opts={{
           align: "start",
           loop: true,
