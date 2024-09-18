@@ -1,14 +1,21 @@
 import { createClient } from "@/prismicio";
 import { PrismicRichText } from "@prismicio/react";
+import { AnnouncementDocument } from "../../prismicio-types";
 
 export async function AnnouncementBanner() {
   const client = createClient();
-  const announcement = await client.getSingle("announcement");
+  let announcement: AnnouncementDocument;
+  try {
+    announcement = await client.getSingle("announcement");
+  } catch (e) {
+    return <></>;
+  }
   const {
     data: { title, description, active, activation_date, expiry_date },
   } = announcement;
+
   const currentDate = new Date();
-  if (announcement === undefined || active === false) {
+  if (active === false) {
     return <></>;
   }
 
