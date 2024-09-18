@@ -1,18 +1,3 @@
-// export default async function Home() {
-//   return (
-//     <main>
-//       <Hero />
-//       <div className="flex flex-col gap-44">
-//         <Sponsors />
-//         <Projects />
-//         <Team />
-//         <Testimonials />
-//         <CallToAction />
-//       </div>
-//     </main>
-//   );
-// }
-
 import { SliceZone } from "@prismicio/react";
 import { Metadata } from "next";
 

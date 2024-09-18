@@ -572,6 +572,92 @@ export type AllDocumentTypes =
   | TeamMembersDocument;
 
 /**
+ * Primary content in *Announcement → Default → Primary*
+ */
+export interface AnnouncementSliceDefaultPrimary {
+  /**
+   * Title field in *Announcement → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *Announcement → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Active field in *Announcement → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: announcement.default.primary.active
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  active: prismic.BooleanField;
+
+  /**
+   * Activation Date field in *Announcement → Default → Primary*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.default.primary.activation_date
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  activation_date: prismic.DateField;
+
+  /**
+   * Expiry Date field in *Announcement → Default → Primary*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.default.primary.expiry_date
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  expiry_date: prismic.DateField;
+}
+
+/**
+ * Default variation for Announcement Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AnnouncementSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<AnnouncementSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Announcement*
+ */
+type AnnouncementSliceVariation = AnnouncementSliceDefault;
+
+/**
+ * Announcement Shared Slice
+ *
+ * - **API ID**: `announcement`
+ * - **Description**: Announcement
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AnnouncementSlice = prismic.SharedSlice<
+  "announcement",
+  AnnouncementSliceVariation
+>;
+
+/**
  * Primary content in *Article → Default → Primary*
  */
 export interface ArticleSliceDefaultPrimary {
@@ -1774,6 +1860,10 @@ declare module "@prismicio/client" {
       TeamMembersDocumentData,
       TeamMembersDocumentDataTeamMembersItem,
       AllDocumentTypes,
+      AnnouncementSlice,
+      AnnouncementSliceDefaultPrimary,
+      AnnouncementSliceVariation,
+      AnnouncementSliceDefault,
       ArticleSlice,
       ArticleSliceDefaultPrimary,
       ArticleSliceWithoutPaddingPrimary,

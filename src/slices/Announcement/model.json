@@ -1,0 +1,58 @@
+{
+  "id": "announcement",
+  "type": "SharedSlice",
+  "name": "Announcement",
+  "description": "Announcement",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,strong,em,embed,hyperlink"
+          }
+        },
+        "active": {
+          "type": "Boolean",
+          "config": {
+            "label": "Active",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": true
+          }
+        },
+        "activation_date": {
+          "type": "Date",
+          "config": {
+            "label": "Activation Date",
+            "placeholder": ""
+          }
+        },
+        "expiry_date": {
+          "type": "Date",
+          "config": {
+            "label": "Expiry Date",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}
