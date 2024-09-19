@@ -4,12 +4,12 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: "/sections/cubesat",
+        source: "/section/cubesat",
         destination: "/trace",
         permanent: true,
       },
       {
-        source: "/sections/rocket",
+        source: "/section/rocket",
         destination: "/rapid",
         permanent: true,
       },
