@@ -27,9 +27,9 @@ export async function AnnouncementBanner() {
     }
   }
   return (
-    <div className="bg-primary text-primary-foreground w-full p-4 flex justify-center">
-      <div className="max-w-screen-md text-center">
-        <h1 className="text-xl md:text-2xl font-bold mb-2">{title}</h1>
+    <div className="bg-primary/60 backdrop-blur-sm border-b-primary/80 border-b-2 text-primary-foreground w-full p-2 flex justify-center">
+      <div className="max-w-screen-md text-center text-sm md:text-md">
+        <h1 className="text-lg md:text-md font-bold mb-1">{title}</h1>
         <PrismicRichText field={description} />
       </div>
     </div>

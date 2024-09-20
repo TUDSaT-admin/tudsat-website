@@ -98,7 +98,7 @@ const SponsorCarousel = ({
 }: { sponsors: Content.SponsorsDocumentDataSponsorsItem[] }) => {
   return (
     <div className="relative max-w-[100vw] w-full flex-col items-center justify-center overflow-hidden">
-      <Marquee pauseOnHover>
+      <Marquee>
         {sponsors.slice(0, sponsors.length / 2).map((sponsor) => (
           <div
             className="flex items-center justify-center max-w-52"
