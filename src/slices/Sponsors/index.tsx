@@ -75,7 +75,7 @@ const SponsorCard = ({ sponsor }: { sponsor: Content.SponsorsDocumentDataSponsor
   return (
     <PrismicNextLink
       field={sponsor.link}
-      className="p-4 flex items-center justify-center shadow-md bg-white/10 rounded-lg ring-2 ring-accent/90"
+      className="p-4 flex items-center justify-center shadow-md bg-white rounded-lg ring-2 ring-accent/90"
     >
       <PrismicNextImage field={sponsor.logo} className="object-contain h-20 w-auto" />
     </PrismicNextLink>
@@ -86,7 +86,7 @@ const HighlightedSponsor = ({ sponsor }: { sponsor: Content.SponsorsDocumentData
   return (
     <PrismicNextLink
       field={sponsor.link}
-      className="p-4 flex col-span-full justify-center shadow-md bg-white/80 rounded-lg ring-8 ring-secondary/90"
+      className="p-4 flex col-span-full justify-center shadow-md bg-white rounded-lg ring-8 ring-secondary/90"
     >
       <PrismicNextImage field={sponsor.logo} className="object-contain h-48 w-auto" />
     </PrismicNextLink>
@@ -108,7 +108,7 @@ const SponsorCarousel = ({
             <PrismicNextLink field={sponsor.link}>
               <PrismicNextImage
                 field={sponsor.logo}
-                className="object-contain h-20 w-auto bg-slate-300/10 p-4 rounded-md hover:bg-slate-300/40 transition-colors duration-300"
+                className="object-contain h-20 w-auto bg-white p-4 rounded-md hover:bg-slate-300/40 transition-colors duration-300"
                 style={{ filter: "drop-shadow(-3px -3px 6px rgba(255,255,255,0.2))" }}
               />
             </PrismicNextLink>
@@ -125,7 +125,7 @@ const SponsorCarousel = ({
             <PrismicNextLink field={sponsor.link}>
               <PrismicNextImage
                 field={sponsor.logo}
-                className="object-contain h-20 w-auto bg-slate-300/10 p-4 rounded-md hover:bg-slate-300/40 transition-colors duration-300"
+                className="object-contain h-20 w-auto bg-white p-4 rounded-md hover:bg-slate-100/80 transition-colors duration-300"
                 style={{ filter: "drop-shadow(-3px -3px 6px rgba(255,255,255,0.2))" }}
               />
             </PrismicNextLink>
