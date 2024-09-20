@@ -5,6 +5,83 @@ import type * as prismic from "@prismicio/client";
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
 /**
+ * Content for Announcement documents
+ */
+interface AnnouncementDocumentData {
+  /**
+   * Title field in *Announcement*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *Announcement*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.description
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Active field in *Announcement*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: false
+   * - **API ID Path**: announcement.active
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  active: prismic.BooleanField;
+
+  /**
+   * Activation Date field in *Announcement*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.activation_date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  activation_date: prismic.DateField;
+
+  /**
+   * Expiry Date field in *Announcement*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.expiry_date
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  expiry_date: prismic.DateField;
+}
+
+/**
+ * Announcement document from Prismic
+ *
+ * - **API ID**: `announcement`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type AnnouncementDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<
+    Simplify<AnnouncementDocumentData>,
+    "announcement",
+    Lang
+  >;
+
+/**
  * Item in *Footer → navigation*
  */
 export interface FooterDocumentDataNavigationItem {
@@ -562,6 +639,7 @@ export type TeamMembersDocument<Lang extends string = string> =
   >;
 
 export type AllDocumentTypes =
+  | AnnouncementDocument
   | FooterDocument
   | HeaderDocument
   | HomeDocument
@@ -570,6 +648,92 @@ export type AllDocumentTypes =
   | SettingsDocument
   | SponsorsDocument
   | TeamMembersDocument;
+
+/**
+ * Primary content in *Announcement → Default → Primary*
+ */
+export interface AnnouncementSliceDefaultPrimary {
+  /**
+   * Title field in *Announcement → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Description field in *Announcement → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Active field in *Announcement → Default → Primary*
+   *
+   * - **Field Type**: Boolean
+   * - **Placeholder**: *None*
+   * - **Default Value**: true
+   * - **API ID Path**: announcement.default.primary.active
+   * - **Documentation**: https://prismic.io/docs/field#boolean
+   */
+  active: prismic.BooleanField;
+
+  /**
+   * Activation Date field in *Announcement → Default → Primary*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.default.primary.activation_date
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  activation_date: prismic.DateField;
+
+  /**
+   * Expiry Date field in *Announcement → Default → Primary*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: announcement.default.primary.expiry_date
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  expiry_date: prismic.DateField;
+}
+
+/**
+ * Default variation for Announcement Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AnnouncementSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<AnnouncementSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Announcement*
+ */
+type AnnouncementSliceVariation = AnnouncementSliceDefault;
+
+/**
+ * Announcement Shared Slice
+ *
+ * - **API ID**: `announcement`
+ * - **Description**: Announcement
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type AnnouncementSlice = prismic.SharedSlice<
+  "announcement",
+  AnnouncementSliceVariation
+>;
 
 /**
  * Primary content in *Article → Default → Primary*
@@ -1750,6 +1914,8 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      AnnouncementDocument,
+      AnnouncementDocumentData,
       FooterDocument,
       FooterDocumentData,
       FooterDocumentDataNavigationItem,
@@ -1774,6 +1940,10 @@ declare module "@prismicio/client" {
       TeamMembersDocumentData,
       TeamMembersDocumentDataTeamMembersItem,
       AllDocumentTypes,
+      AnnouncementSlice,
+      AnnouncementSliceDefaultPrimary,
+      AnnouncementSliceVariation,
+      AnnouncementSliceDefault,
       ArticleSlice,
       ArticleSliceDefaultPrimary,
       ArticleSliceWithoutPaddingPrimary,

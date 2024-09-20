@@ -9,6 +9,7 @@ import { Analytics } from "@vercel/analytics/react";
 import dynamic from "next/dynamic";
 import { Orbitron, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { AnnouncementBanner } from "@/components/announcement-banner";
 
 const StarrySkyCanvas = dynamic(() => import("@/components/starry-sky-canvas"), {
   ssr: false,
@@ -59,6 +60,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="dark">
           <StarrySkyCanvas />
+          <AnnouncementBanner />
           <Header />
           <main className="flex flex-1 flex-col items-center">{children}</main>
           <Footer />
