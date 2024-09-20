@@ -7,6 +7,7 @@ Welcome to the public website of the Technische Universität Darmstadt Space Tec
 ## Table of Contents
 
 - [Installation](#installation)
+- [Environment Variables](#environment-variables)
 - [Scripts](#scripts)
 - [Technologies Used](#technologies-used)
 - [Project Structure](#project-structure)
@@ -39,12 +40,34 @@ To run this project locally, ensure you have [Node.js](https://nodejs.org/en/) i
     bun install
     ```
 
-4. Start the development server, including Prismic Slice Machine:
+4. Set up environment variables by following the instructions in the [Environment Variables](#environment-variables) section.
+
+5. Start the development server, including Prismic Slice Machine:
     ```bash
     bun dev
     ```
 
 The website will be available at `http://localhost:3000`, and the Prismic Slice Machine will be available for managing slices.
+
+## Environment Variables
+
+To access the content from Prismic, you need to set up environment variables:
+
+1. Create a `.env.local` file at the root of your project:
+    ```bash
+    touch .env.local
+    ```
+
+2. Inside the `.env.local` file, add the following environment variable:
+    ```
+    NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN=your-access-token-here
+    ```
+
+    You can find your Prismic access token in the Prismic dashboard under **Settings > API & Security**. Copy the access token and paste it into the `.env.local` file.
+
+3. For production deployment, make sure to add the `NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN` environment variable in your deployment platform (such as Vercel) under the project's environment settings.
+
+4. All environment variables used in the project are listed in the `.env.example` file for reference.
 
 ## Scripts
 
@@ -189,17 +212,3 @@ bun format
 ### Deployment
 
 Every push to the repository will trigger an automatic deployment to Vercel. Be cautious when pushing code, as the live site will update with every commit.
-
-For more detailed deployment instructions, refer to [Vercel's documentation](https://vercel.com/docs/concepts/deployments).
-
-## Contact
-
-If you have any questions or need further assistance, feel free to reach out to us at:
-
-**Email**: [vorstand@tudsat.space](mailto:vorstand@tudsat.space)
-
----
-
-### License
-
-This project is licensed under the MIT License.
