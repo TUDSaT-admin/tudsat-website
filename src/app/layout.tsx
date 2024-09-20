@@ -10,6 +10,7 @@ import dynamic from "next/dynamic";
 import { Orbitron, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { AnnouncementBanner } from "@/components/announcement-banner";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const StarrySkyCanvas = dynamic(() => import("@/components/starry-sky-canvas"), {
   ssr: false,
@@ -67,6 +68,7 @@ export default function RootLayout({
         </ThemeProvider>
         <PrismicPreview repositoryName={repositoryName} />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
