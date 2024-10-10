@@ -13,6 +13,7 @@ Welcome to the public website of the Technische Universität Darmstadt Space Tec
 - [Project Structure](#project-structure)
 - [Prismic & Slices](#prismic--slices)
 - [Deployment](#deployment)
+- [Webhook Setup for Prismic & Vercel](#webhook-setup-for-prismic--vercel)
 - [Contribution Guidelines](#contribution-guidelines)
 - [Contact](#contact)
 
@@ -186,6 +187,14 @@ The project is continuously deployed on [Vercel](https://vercel.com/).
 - After every push to the main branch, the site is automatically redeployed.
 
 For more information on how to deploy Next.js apps to Vercel, check the [official Vercel docs](https://vercel.com/docs/concepts/deployments).
+
+## Webhook Setup for Prismic & Vercel
+
+To ensure that changes made in Prismic automatically trigger a deployment on Vercel, you will need to set up a webhook in Prismic. This is a one-time setup that connects Prismic to the deployment pipeline.
+
+Refer to the official [Prismic Webhooks Documentation](https://prismic.io/docs/webhooks) for detailed steps on how to create and configure the webhook with Vercel.
+
+Once configured, the website will automatically redeploy every time content is updated in Prismic.
 
 ## Contribution Guidelines
 
