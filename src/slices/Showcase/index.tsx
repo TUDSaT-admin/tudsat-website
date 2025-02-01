@@ -33,11 +33,7 @@ const Showcase = ({ slice }: ShowcaseProps): JSX.Element => {
               }
               style={{ backgroundColor: item.color || "#000000", opacity: 0.8 }}
             >
-              <h3 className="transition-[margin] mb-0 group-hover:mb-3 text-6xl font-black text-center  tracking-widest font-mono"
-                  style={{
-                    fontSize: `${Math.max(60 - item.title.length, 20)}px`  // Dynamische Schriftgröße zwischen 20px und 60px
-                  }}
-              >
+              <h3 className="transition-[margin] mb-0 group-hover:mb-3 ${item.title.length > 10 ? 'text-3xl' : item.title.length > 5 ? 'text-5xl' : 'text-6xl'} font-black text-center  tracking-widest font-mono">
                 {item.title}
               </h3>
               <p className="text-center max-h-0 text-xs transition-all ease-in duration-200 opacity-100 group-hover:opacity-0">
