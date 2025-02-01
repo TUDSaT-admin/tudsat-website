@@ -33,7 +33,7 @@ const Showcase = ({ slice }: ShowcaseProps): JSX.Element => {
               }
               style={{ backgroundColor: item.color || "#000000", opacity: 0.8 }}
             >
-              <h3 className="transition-[margin] mb-0 group-hover:mb-3 text-5xl font-black text-center  tracking-wider font-mono">
+              <h3 className="transition-[margin] mb-0 group-hover:mb-3 text-5xl font-black text-center  tracking-wide font-mono">
                 {item.title}
               </h3>
               <p className="text-center max-h-0 text-xs transition-all ease-in duration-200 opacity-100 group-hover:opacity-0">
