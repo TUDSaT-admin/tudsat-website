@@ -31,11 +31,11 @@ const InfoHeader = ({ slice }: InfoHeaderProps): JSX.Element => {
         </div>
       </div>
       <div className="flex flex-col p-4 md:p-0 md:flex-row gap-4 ">
-        <InfoCard icon="userRound" description={slice.primary.lead} title="Contact" isTransparent />
+        <InfoCard icon="userRound" description={slice.primary.lead} title="Lead" isTransparent />
         <InfoCard
           icon="calendar"
           description={slice.primary.meeting}
-          title="Date"
+          title="Meeting"
           isTransparent
         />
         <InfoCard icon="mail" description={slice.primary.email} title="Email" isTransparent />
