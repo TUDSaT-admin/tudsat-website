@@ -3,7 +3,7 @@
   "id": "sponsors",
   "label": "Sponsors",
   "repeatable": false,
-  "status": false,
+  "status": true,
   "json": {
     "Main": {
       "sponsors": {
