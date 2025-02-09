@@ -2,8 +2,8 @@
   "format": "custom",
   "id": "sponsors",
   "label": "Sponsors",
-  "repeatable": false,
-  "status": false,
+  "repeatable": true,
+  "status": true,
   "json": {
     "Main": {
       "sponsors": {
