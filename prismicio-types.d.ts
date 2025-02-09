@@ -491,7 +491,7 @@ export interface SponsorsDocumentDataSponsorsItem {
   category: prismic.SelectField<
     | "TRACE Prime Sponsor"
     | "RAPID Prime Sponsor"
-    | "Our Sponsors"
+    | "Our Sponsors & Supporters"
     | "Our Academic Partners"
   >;
 
