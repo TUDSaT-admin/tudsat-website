@@ -26,6 +26,9 @@
             "sponsors": {
               "type": "SharedSlice"
             },
+            "article": {
+              "type": "SharedSlice"
+            },
             "hero": {
               "type": "SharedSlice"
             }
