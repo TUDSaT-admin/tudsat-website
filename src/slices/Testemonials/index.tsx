@@ -31,7 +31,7 @@ const Testemonials = ({ slice }: TestemonialsProps): JSX.Element => {
     });
   }, [api]);
 
-  const plugin = useRef(Autoplay({ delay: 2000, stopOnInteraction: true }));
+  const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
   return (
     <Bounded
       data-slice-type={slice.slice_type}
