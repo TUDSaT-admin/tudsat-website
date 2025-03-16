@@ -1674,6 +1674,71 @@ export type SubsectionsSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Teams → Items*
+ */
+export interface TeamsSliceDefaultItem {
+  /**
+   * Name field in *Teams → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: teams.items[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Link field in *Teams → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: teams.items[].link
+   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
+   */
+  link: prismic.LinkField;
+
+  /**
+   * Image field in *Teams → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: teams.items[].image
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for Teams Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamsSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  Simplify<TeamsSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Teams*
+ */
+type TeamsSliceVariation = TeamsSliceDefault;
+
+/**
+ * Teams Shared Slice
+ *
+ * - **API ID**: `teams`
+ * - **Description**: Teams
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamsSlice = prismic.SharedSlice<
+  "teams",
+  TeamsSliceVariation
+>;
+
+/**
  * Primary content in *TeamMembers → Default → Primary*
  */
 export interface TeamMembersSliceDefaultPrimary {
@@ -1916,6 +1981,10 @@ declare module "@prismicio/client" {
       SubsectionsSliceDefaultItem,
       SubsectionsSliceVariation,
       SubsectionsSliceDefault,
+      TeamsSlice,
+      TeamsSliceDefaultItem,
+      TeamsSliceVariation,
+      TeamsSliceDefault,
       TeamMembersSlice,
       TeamMembersSliceDefaultPrimary,
       TeamMembersSliceVariation,
