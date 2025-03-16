@@ -49,6 +49,9 @@
             },
             "article": {
               "type": "SharedSlice"
+            },
+            "teams": {
+              "type": "SharedSlice"
             }
           }
         }
