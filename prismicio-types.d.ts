@@ -270,7 +270,7 @@ type PageDocumentDataSlicesSlice =
   | SponsorsSlice
   | InfoGridSlice
   | SubsectionsSlice
-  | TeamSlice
+  | TeamsSlice
   | ProjectsSlice
   | ArticleSlice;
 
