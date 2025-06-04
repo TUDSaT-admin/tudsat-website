@@ -842,6 +842,36 @@ export type CallToActionSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Default variation for CamGroundstation Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CamGroundstationSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  never
+>;
+
+/**
+ * Slice variation for *CamGroundstation*
+ */
+type CamGroundstationSliceVariation = CamGroundstationSliceDefault;
+
+/**
+ * CamGroundstation Shared Slice
+ *
+ * - **API ID**: `cam_groundstation`
+ * - **Description**: CamGroundstation
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CamGroundstationSlice = prismic.SharedSlice<
+  "cam_groundstation",
+  CamGroundstationSliceVariation
+>;
+
+/**
  * Item in *Carousel → Default → Primary → Images*
  */
 export interface CarouselSliceDefaultPrimaryImagesItem {
@@ -1933,6 +1963,9 @@ declare module "@prismicio/client" {
       CallToActionSliceDefaultPrimary,
       CallToActionSliceVariation,
       CallToActionSliceDefault,
+      CamGroundstationSlice,
+      CamGroundstationSliceVariation,
+      CamGroundstationSliceDefault,
       CarouselSlice,
       CarouselSliceDefaultPrimaryImagesItem,
       CarouselSliceDefaultPrimary,

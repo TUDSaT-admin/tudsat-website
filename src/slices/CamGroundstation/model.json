@@ -1,0 +1,16 @@
+{
+  "id": "cam_groundstation",
+  "type": "SharedSlice",
+  "name": "CamGroundstation",
+  "description": "CamGroundstation",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": ""
+    }
+  ]
+}
