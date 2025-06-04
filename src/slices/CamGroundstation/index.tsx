@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useState, useMemo } from "react"
+import { useState, useMemo } from "react";
 import Bounded from "@/components/bounded";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
@@ -11,23 +11,23 @@ import { Button } from "@/components/ui/button";
  */
 export type CamGroundstationProps = SliceComponentProps<Content.CamGroundstationSlice>;
 
-const camResolutionsArray = ["2k", "1080p", "720p"] as const
-type camResolutions = typeof camResolutionsArray[number]
+const camResolutionsArray = ["2k", "1080p", "720p"] as const;
+type camResolutions = (typeof camResolutionsArray)[number];
 
 /**
  * Component for "CamGroundstation" Slices.
  */
 const CamGroundstation = ({ slice }: CamGroundstationProps): JSX.Element => {
-  const [resolution, setResolution] = useState<camResolutions>("1080p")
+  const [resolution, setResolution] = useState<camResolutions>("1080p");
 
   const url = useMemo(() => {
     if (resolution === "2k") {
-      return "https://cam-groundstation.tudsat.space/11?action=play&media=mjpeg"
+      return "https://cam-groundstation.tudsat.space/11?action=play&media=mjpeg";
     } else if (resolution === "1080p") {
-      return "https://cam-groundstation.tudsat.space/12?action=play&media=mjpeg"
+      return "https://cam-groundstation.tudsat.space/12?action=play&media=mjpeg";
     }
-    return "https://cam-groundstation.tudsat.space/13?action=play&media=mjpeg"
-  }, [resolution])
+    return "https://cam-groundstation.tudsat.space/13?action=play&media=mjpeg";
+  }, [resolution]);
 
   return (
     <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>

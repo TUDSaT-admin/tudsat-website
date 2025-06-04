@@ -55,9 +55,7 @@
           "config": {
             "label": "Link",
             "select": "document",
-            "customtypes": [
-              "page"
-            ]
+            "customtypes": ["page"]
           }
         },
         "color": {
