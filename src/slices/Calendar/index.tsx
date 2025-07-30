@@ -29,10 +29,7 @@ const Calendar = ({ slice }: CalendarProps): JSX.Element => {
   }, [calendar]);
 
   return (
-    <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
+    <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
       <div className="h-[72rem] flex items-center justify-center">
         <iframe
           title="Calendar"
@@ -44,22 +41,13 @@ const Calendar = ({ slice }: CalendarProps): JSX.Element => {
         />
       </div>
       <div className="flex gap-2 items-center">
-        <Button
-          onClick={() => setCalendar("default")}
-          disabled={calendar === "default"}
-        >
+        <Button onClick={() => setCalendar("default")} disabled={calendar === "default"}>
           TUDSaT
         </Button>
-        <Button
-          onClick={() => setCalendar("trace")}
-          disabled={calendar === "trace"}
-        >
+        <Button onClick={() => setCalendar("trace")} disabled={calendar === "trace"}>
           TRACE
         </Button>
-        <Button
-          onClick={() => setCalendar("rapid")}
-          disabled={calendar === "rapid"}
-        >
+        <Button onClick={() => setCalendar("rapid")} disabled={calendar === "rapid"}>
           RAPID
         </Button>
       </div>

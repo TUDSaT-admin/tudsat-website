@@ -12,42 +12,32 @@ type PickContentRelationshipFieldData<
     | prismic.CustomTypeModelFetchGroupLevel2,
   TData extends Record<
     string,
-    | prismic.AnyRegularField
-    | prismic.GroupField
-    | prismic.NestedGroupField
-    | prismic.SliceZone
+    prismic.AnyRegularField | prismic.GroupField | prismic.NestedGroupField | prismic.SliceZone
   >,
   TLang extends string,
-> =
-  // Content relationship fields
-  {
-    [TSubRelationship in Extract<
-      TRelationship["fields"][number],
-      prismic.CustomTypeModelFetchContentRelationshipLevel1
-    > as TSubRelationship["id"]]: ContentRelationshipFieldWithData<
-      TSubRelationship["customtypes"],
-      TLang
-    >;
-  } & // Group
-  {
-    [TGroup in Extract<
-      TRelationship["fields"][number],
-      | prismic.CustomTypeModelFetchGroupLevel1
-      | prismic.CustomTypeModelFetchGroupLevel2
-    > as TGroup["id"]]: TData[TGroup["id"]] extends prismic.GroupField<
-      infer TGroupData
-    >
-      ? prismic.GroupField<
-          PickContentRelationshipFieldData<TGroup, TGroupData, TLang>
-        >
-      : never;
-  } & // Other fields
-  {
-    [TFieldKey in Extract<
-      TRelationship["fields"][number],
-      string
-    >]: TFieldKey extends keyof TData ? TData[TFieldKey] : never;
-  };
+> = // Content relationship fields
+{
+  [TSubRelationship in Extract<
+    TRelationship["fields"][number],
+    prismic.CustomTypeModelFetchContentRelationshipLevel1
+  > as TSubRelationship["id"]]: ContentRelationshipFieldWithData<
+    TSubRelationship["customtypes"],
+    TLang
+  >;
+} & {
+  // Group
+  [TGroup in Extract<
+    TRelationship["fields"][number],
+    prismic.CustomTypeModelFetchGroupLevel1 | prismic.CustomTypeModelFetchGroupLevel2
+  > as TGroup["id"]]: TData[TGroup["id"]] extends prismic.GroupField<infer TGroupData>
+    ? prismic.GroupField<PickContentRelationshipFieldData<TGroup, TGroupData, TLang>>
+    : never;
+} & {
+  // Other fields
+  [TFieldKey in Extract<TRelationship["fields"][number], string>]: TFieldKey extends keyof TData
+    ? TData[TFieldKey]
+    : never;
+};
 
 type ContentRelationshipFieldWithData<
   TCustomType extends
@@ -55,10 +45,7 @@ type ContentRelationshipFieldWithData<
     | readonly (prismic.CustomTypeModelFetchCustomTypeLevel2 | string)[],
   TLang extends string = string,
 > = {
-  [ID in Exclude<
-    TCustomType[number],
-    string
-  >["id"]]: prismic.ContentRelationshipField<
+  [ID in Exclude<TCustomType[number], string>["id"]]: prismic.ContentRelationshipField<
     ID,
     TLang,
     PickContentRelationshipFieldData<
@@ -139,12 +126,11 @@ interface AnnouncementDocumentData {
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type AnnouncementDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<AnnouncementDocumentData>,
-    "announcement",
-    Lang
-  >;
+export type AnnouncementDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
+  Simplify<AnnouncementDocumentData>,
+  "announcement",
+  Lang
+>;
 
 /**
  * Item in *Footer → navigation*
@@ -196,12 +182,11 @@ interface FooterDocumentData {
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type FooterDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<FooterDocumentData>,
-    "footer",
-    Lang
-  >;
+export type FooterDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
+  Simplify<FooterDocumentData>,
+  "footer",
+  Lang
+>;
 
 /**
  * Item in *Header → Navigation*
@@ -253,12 +238,11 @@ interface HeaderDocumentData {
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type HeaderDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<HeaderDocumentData>,
-    "header",
-    Lang
-  >;
+export type HeaderDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
+  Simplify<HeaderDocumentData>,
+  "header",
+  Lang
+>;
 
 type HomeDocumentDataSlicesSlice =
   | CallToActionSlice
@@ -325,8 +309,11 @@ interface HomeDocumentData {
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type HomeDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<Simplify<HomeDocumentData>, "home", Lang>;
+export type HomeDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
+  Simplify<HomeDocumentData>,
+  "home",
+  Lang
+>;
 
 type PageDocumentDataSlicesSlice =
   | CamGroundstationSlice
@@ -407,8 +394,11 @@ interface PageDocumentData {
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type PageDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<Simplify<PageDocumentData>, "page", Lang>;
+export type PageDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+  Simplify<PageDocumentData>,
+  "page",
+  Lang
+>;
 
 /**
  * Content for Section documents
@@ -457,12 +447,11 @@ interface SectionDocumentData {
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type SectionDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithUID<
-    Simplify<SectionDocumentData>,
-    "section",
-    Lang
-  >;
+export type SectionDocument<Lang extends string = string> = prismic.PrismicDocumentWithUID<
+  Simplify<SectionDocumentData>,
+  "section",
+  Lang
+>;
 
 /**
  * Item in *Settings → Socials*
@@ -476,9 +465,7 @@ export interface SettingsDocumentDataSocialsItem {
    * - **API ID Path**: settings.socials[].social_platform
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
-  social_platform: prismic.SelectField<
-    "instagram" | "linkedin" | "discord" | "youtube" | "mail"
-  >;
+  social_platform: prismic.SelectField<"instagram" | "linkedin" | "discord" | "youtube" | "mail">;
 
   /**
    * Link field in *Settings → Socials*
@@ -516,12 +503,11 @@ interface SettingsDocumentData {
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type SettingsDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<SettingsDocumentData>,
-    "settings",
-    Lang
-  >;
+export type SettingsDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
+  Simplify<SettingsDocumentData>,
+  "settings",
+  Lang
+>;
 
 /**
  * Item in *Sponsors → Sponsors*
@@ -611,12 +597,11 @@ interface SponsorsDocumentData {
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type SponsorsDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<SponsorsDocumentData>,
-    "sponsors",
-    Lang
-  >;
+export type SponsorsDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
+  Simplify<SponsorsDocumentData>,
+  "sponsors",
+  Lang
+>;
 
 /**
  * Item in *Team Members → Team Members*
@@ -687,9 +672,7 @@ interface TeamMembersDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
-  team_members: prismic.GroupField<
-    Simplify<TeamMembersDocumentDataTeamMembersItem>
-  >;
+  team_members: prismic.GroupField<Simplify<TeamMembersDocumentDataTeamMembersItem>>;
 }
 
 /**
@@ -701,12 +684,11 @@ interface TeamMembersDocumentData {
  *
  * @typeParam Lang - Language API ID of the document.
  */
-export type TeamMembersDocument<Lang extends string = string> =
-  prismic.PrismicDocumentWithoutUID<
-    Simplify<TeamMembersDocumentData>,
-    "team_members",
-    Lang
-  >;
+export type TeamMembersDocument<Lang extends string = string> = prismic.PrismicDocumentWithoutUID<
+  Simplify<TeamMembersDocumentData>,
+  "team_members",
+  Lang
+>;
 
 export type AllDocumentTypes =
   | AnnouncementDocument
@@ -787,10 +769,7 @@ type ArticleSliceVariation = ArticleSliceDefault | ArticleSliceWithoutPadding;
  * - **Description**: Article
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type ArticleSlice = prismic.SharedSlice<
-  "article",
-  ArticleSliceVariation
->;
+export type ArticleSlice = prismic.SharedSlice<"article", ArticleSliceVariation>;
 
 /**
  * TUDSaT variation for Calendar Slice
@@ -834,10 +813,7 @@ export type CalendarSliceRapid = prismic.SharedSliceVariation<
 /**
  * Slice variation for *Calendar*
  */
-type CalendarSliceVariation =
-  | CalendarSliceDefault
-  | CalendarSliceTrace
-  | CalendarSliceRapid;
+type CalendarSliceVariation = CalendarSliceDefault | CalendarSliceTrace | CalendarSliceRapid;
 
 /**
  * Calendar Shared Slice
@@ -846,10 +822,7 @@ type CalendarSliceVariation =
  * - **Description**: Calendar
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type CalendarSlice = prismic.SharedSlice<
-  "calendar",
-  CalendarSliceVariation
->;
+export type CalendarSlice = prismic.SharedSlice<"calendar", CalendarSliceVariation>;
 
 /**
  * Primary content in *CallToAction → Default → Primary*
@@ -893,13 +866,7 @@ export interface CallToActionSliceDefaultPrimary {
    * - **API ID Path**: call_to_action.default.primary.call_to_action_link
    * - **Documentation**: https://prismic.io/docs/fields/link
    */
-  call_to_action_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >;
+  call_to_action_link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 
   /**
    * Image 1 field in *CallToAction → Default → Primary*
@@ -967,10 +934,7 @@ type CallToActionSliceVariation = CallToActionSliceDefault;
  * - **Description**: CallToAction
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type CallToActionSlice = prismic.SharedSlice<
-  "call_to_action",
-  CallToActionSliceVariation
->;
+export type CallToActionSlice = prismic.SharedSlice<"call_to_action", CallToActionSliceVariation>;
 
 /**
  * Default variation for CamGroundstation Slice
@@ -1057,10 +1021,7 @@ type CarouselSliceVariation = CarouselSliceDefault;
  * - **Description**: Carousel
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type CarouselSlice = prismic.SharedSlice<
-  "carousel",
-  CarouselSliceVariation
->;
+export type CarouselSlice = prismic.SharedSlice<"carousel", CarouselSliceVariation>;
 
 /**
  * Primary content in *Hero → Default → Primary*
@@ -1104,13 +1065,7 @@ export interface HeroSliceDefaultPrimary {
    * - **API ID Path**: hero.default.primary.cta_primary_link
    * - **Documentation**: https://prismic.io/docs/fields/link
    */
-  cta_primary_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >;
+  cta_primary_link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 
   /**
    * CTA Secondary Text field in *Hero → Default → Primary*
@@ -1130,13 +1085,7 @@ export interface HeroSliceDefaultPrimary {
    * - **API ID Path**: hero.default.primary.cta_secondary_link
    * - **Documentation**: https://prismic.io/docs/fields/link
    */
-  cta_secondary_link: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >;
+  cta_secondary_link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 
   /**
    * Background Image 1 field in *Hero → Default → Primary*
@@ -1261,10 +1210,7 @@ type InfoGridSliceVariation = InfoGridSliceDefault;
  * - **Description**: InfoGrid
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type InfoGridSlice = prismic.SharedSlice<
-  "info_grid",
-  InfoGridSliceVariation
->;
+export type InfoGridSlice = prismic.SharedSlice<"info_grid", InfoGridSliceVariation>;
 
 /**
  * Primary content in *InfoHeader → Default → Primary*
@@ -1356,10 +1302,7 @@ type InfoHeaderSliceVariation = InfoHeaderSliceDefault;
  * - **Description**: InfoHeader
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type InfoHeaderSlice = prismic.SharedSlice<
-  "info_header",
-  InfoHeaderSliceVariation
->;
+export type InfoHeaderSlice = prismic.SharedSlice<"info_header", InfoHeaderSliceVariation>;
 
 /**
  * Default variation for MembershipForm Slice
@@ -1479,10 +1422,7 @@ type MenuItemSliceVariation = MenuItemSliceDefault | MenuItemSliceWithSubMenu;
  * - **Description**: MenuItem
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type MenuItemSlice = prismic.SharedSlice<
-  "menu_item",
-  MenuItemSliceVariation
->;
+export type MenuItemSlice = prismic.SharedSlice<"menu_item", MenuItemSliceVariation>;
 
 /**
  * Primary content in *Projects → Items*
@@ -1544,10 +1484,7 @@ type ProjectsSliceVariation = ProjectsSliceDefault;
  * - **Description**: Projects
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type ProjectsSlice = prismic.SharedSlice<
-  "projects",
-  ProjectsSliceVariation
->;
+export type ProjectsSlice = prismic.SharedSlice<"projects", ProjectsSliceVariation>;
 
 /**
  * Primary content in *Showcase → Default → Primary*
@@ -1654,10 +1591,7 @@ type ShowcaseSliceVariation = ShowcaseSliceDefault;
  * - **Description**: Showcase
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type ShowcaseSlice = prismic.SharedSlice<
-  "showcase",
-  ShowcaseSliceVariation
->;
+export type ShowcaseSlice = prismic.SharedSlice<"showcase", ShowcaseSliceVariation>;
 
 /**
  * Primary content in *Sponsors → Default → Primary*
@@ -1681,13 +1615,7 @@ export interface SponsorsSliceDefaultPrimary {
    * - **API ID Path**: sponsors.default.primary.sponsors_page
    * - **Documentation**: https://prismic.io/docs/fields/link
    */
-  sponsors_page: prismic.LinkField<
-    string,
-    string,
-    unknown,
-    prismic.FieldState,
-    never
-  >;
+  sponsors_page: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 }
 
 /**
@@ -1710,11 +1638,7 @@ export type SponsorsSliceDefault = prismic.SharedSliceVariation<
  * - **Description**: Default
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type SponsorsSliceFull = prismic.SharedSliceVariation<
-  "full",
-  Record<string, never>,
-  never
->;
+export type SponsorsSliceFull = prismic.SharedSliceVariation<"full", Record<string, never>, never>;
 
 /**
  * Slice variation for *Sponsors*
@@ -1728,10 +1652,7 @@ type SponsorsSliceVariation = SponsorsSliceDefault | SponsorsSliceFull;
  * - **Description**: Sponsors
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type SponsorsSlice = prismic.SharedSlice<
-  "sponsors",
-  SponsorsSliceVariation
->;
+export type SponsorsSlice = prismic.SharedSlice<"sponsors", SponsorsSliceVariation>;
 
 /**
  * Primary content in *SubMenuItem → Default → Primary*
@@ -1783,10 +1704,7 @@ type SubMenuItemSliceVariation = SubMenuItemSliceDefault;
  * - **Description**: SubMenuItem
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type SubMenuItemSlice = prismic.SharedSlice<
-  "sub_menu_item",
-  SubMenuItemSliceVariation
->;
+export type SubMenuItemSlice = prismic.SharedSlice<"sub_menu_item", SubMenuItemSliceVariation>;
 
 /**
  * Primary content in *Subsections → Items*
@@ -1848,10 +1766,7 @@ type SubsectionsSliceVariation = SubsectionsSliceDefault;
  * - **Description**: Subsections
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type SubsectionsSlice = prismic.SharedSlice<
-  "subsections",
-  SubsectionsSliceVariation
->;
+export type SubsectionsSlice = prismic.SharedSlice<"subsections", SubsectionsSliceVariation>;
 
 /**
  * Primary content in *TeamMembers → Default → Primary*
@@ -1906,10 +1821,7 @@ type TeamMembersSliceVariation = TeamMembersSliceDefault | TeamMembersSliceFull;
  * - **Description**: TeamMembers
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type TeamMembersSlice = prismic.SharedSlice<
-  "team_members",
-  TeamMembersSliceVariation
->;
+export type TeamMembersSlice = prismic.SharedSlice<"team_members", TeamMembersSliceVariation>;
 
 /**
  * Primary content in *Teams → Items*
@@ -2058,29 +1970,20 @@ type TestemonialsSliceVariation = TestemonialsSliceDefault;
  * - **Description**: Testemonials
  * - **Documentation**: https://prismic.io/docs/slices
  */
-export type TestemonialsSlice = prismic.SharedSlice<
-  "testemonials",
-  TestemonialsSliceVariation
->;
+export type TestemonialsSlice = prismic.SharedSlice<"testemonials", TestemonialsSliceVariation>;
 
 declare module "@prismicio/client" {
-  interface CreateClient {
-    (
-      repositoryNameOrEndpoint: string,
-      options?: prismic.ClientConfig,
-    ): prismic.Client<AllDocumentTypes>;
-  }
+  type CreateClient = (
+    repositoryNameOrEndpoint: string,
+    options?: prismic.ClientConfig,
+  ) => prismic.Client<AllDocumentTypes>;
 
-  interface CreateWriteClient {
-    (
-      repositoryNameOrEndpoint: string,
-      options: prismic.WriteClientConfig,
-    ): prismic.WriteClient<AllDocumentTypes>;
-  }
+  type CreateWriteClient = (
+    repositoryNameOrEndpoint: string,
+    options: prismic.WriteClientConfig,
+  ) => prismic.WriteClient<AllDocumentTypes>;
 
-  interface CreateMigration {
-    (): prismic.Migration<AllDocumentTypes>;
-  }
+  type CreateMigration = () => prismic.Migration<AllDocumentTypes>;
 
   namespace Content {
     export type {

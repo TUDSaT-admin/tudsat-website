@@ -6,6 +6,7 @@ import Teams from "./Teams";
 export const components = {
   article: dynamic(() => import("./Article")),
   call_to_action: dynamic(() => import("./CallToAction")),
+  calendar: dynamic(() => import("./Calendar")),
   cam_groundstation: dynamic(() => import("./CamGroundstation")),
   carousel: dynamic(() => import("./Carousel")),
   hero: dynamic(() => import("./Hero")),
