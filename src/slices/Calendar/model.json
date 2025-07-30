@@ -1,0 +1,38 @@
+{
+  "id": "calendar",
+  "type": "SharedSlice",
+  "name": "Calendar",
+  "description": "Calendar",
+  "variations": [
+    {
+      "id": "default",
+      "name": "TUDSaT",
+      "docURL": "...",
+      "version": "initial",
+      "description": "TUDSaT Calendar",
+      "imageUrl": "",
+      "primary": {},
+      "items": {}
+    },
+    {
+      "id": "trace",
+      "name": "TRACE",
+      "docURL": "...",
+      "version": "initial",
+      "description": "TRACE Calendar",
+      "imageUrl": "",
+      "primary": {},
+      "items": {}
+    },
+    {
+      "id": "rapid",
+      "name": "RAPID",
+      "docURL": "...",
+      "version": "initial",
+      "description": "RAPID Calendar",
+      "imageUrl": "",
+      "primary": {},
+      "items": {}
+    }
+  ]
+}
