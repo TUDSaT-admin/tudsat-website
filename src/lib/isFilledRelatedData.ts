@@ -1,9 +1,12 @@
-import { Content, FilledContentRelationshipField, LinkField, isFilled } from "@prismicio/client";
+import {
+  Content,
+  FilledContentRelationshipField,
+  LinkField,
+  isFilled,
+} from "@prismicio/client";
 
-type DocumentData<TDocumentType extends Content.AllDocumentTypes["type"]> = Extract<
-  Content.AllDocumentTypes,
-  { type: TDocumentType }
->["data"];
+type DocumentData<TDocumentType extends Content.AllDocumentTypes["type"]> =
+  Extract<Content.AllDocumentTypes, { type: TDocumentType }>["data"];
 
 export function isFilledRelatedData<
   TDocumentType extends Content.AllDocumentTypes["type"],
@@ -11,7 +14,7 @@ export function isFilledRelatedData<
 >(
   linkField: LinkField,
   documentType: TDocumentType,
-  fieldID: TFieldID,
+  fieldID: TFieldID
 ): linkField is FilledContentRelationshipField & {
   data: {
     [P in keyof DocumentData<TDocumentType> as P extends TFieldID
@@ -20,7 +23,8 @@ export function isFilledRelatedData<
   };
 } {
   return (
-    isFilled.contentRelationship(linkField) &&
+    isFilled.link(linkField) &&
+    "type" in linkField &&
     linkField.type === documentType &&
     typeof linkField.data === "object" &&
     linkField.data !== null &&
