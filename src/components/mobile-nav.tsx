@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import * as React from "react";
 
-import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { Content, LinkField } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
@@ -14,7 +13,11 @@ import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import * as prismic from "@prismicio/client";
 import Link from "next/link";
 
-export function MobileNav({ items }: { items: Content.HeaderDocumentDataNavigationItem[] }) {
+export function MobileNav({
+  items,
+}: {
+  items: Content.HeaderDocumentDataNavigationItem[];
+}) {
   const [open, setOpen] = React.useState(false);
 
   return (
@@ -61,7 +64,11 @@ export function MobileNav({ items }: { items: Content.HeaderDocumentDataNavigati
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="pr-0">
-        <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
+        <Link
+          href="/"
+          className="flex items-center"
+          onClick={() => setOpen(false)}
+        >
           <Image
             className="ml-4 h-20 w-20"
             src="tudsat_logo.svg"
@@ -76,10 +83,14 @@ export function MobileNav({ items }: { items: Content.HeaderDocumentDataNavigati
               (item) =>
                 // biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
                 item.link && (
-                  <MobileLink key={item.label} link={item.link} onOpenChange={setOpen}>
+                  <MobileLink
+                    key={item.label}
+                    link={item.link}
+                    onOpenChange={setOpen}
+                  >
                     {item.label}
                   </MobileLink>
-                ),
+                )
             )}
           </div>
           {/* Nested Links
@@ -125,7 +136,13 @@ interface MobileLinkProps {
   className?: string;
 }
 
-function MobileLink({ link, onOpenChange, className, children, ...props }: MobileLinkProps) {
+function MobileLink({
+  link,
+  onOpenChange,
+  className,
+  children,
+  ...props
+}: MobileLinkProps) {
   const router = useRouter();
   return (
     <PrismicNextLink

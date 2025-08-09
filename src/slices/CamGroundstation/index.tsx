@@ -9,15 +9,15 @@ import { Button } from "@/components/ui/button";
 /**
  * Props for `CamGroundstation`.
  */
-export type CamGroundstationProps = SliceComponentProps<Content.CamGroundstationSlice>;
+export type CamGroundstationProps =
+  SliceComponentProps<Content.CamGroundstationSlice>;
 
-const camResolutionsArray = ["2k", "1080p", "720p"] as const;
-type camResolutions = (typeof camResolutionsArray)[number];
+type camResolutions = "2k" | "1080p" | "720p";
 
 /**
  * Component for "CamGroundstation" Slices.
  */
-const CamGroundstation = ({ slice }: CamGroundstationProps): JSX.Element => {
+const CamGroundstation = ({ slice }: CamGroundstationProps) => {
   const [resolution, setResolution] = useState<camResolutions>("1080p");
 
   const url = useMemo(() => {
@@ -31,7 +31,10 @@ const CamGroundstation = ({ slice }: CamGroundstationProps): JSX.Element => {
   }, [resolution]);
 
   return (
-    <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+    <Bounded
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+    >
       <div className="h-[72rem] flex items-center justify-center">
         <iframe
           title="Groundstation Livestream"
@@ -43,13 +46,22 @@ const CamGroundstation = ({ slice }: CamGroundstationProps): JSX.Element => {
         />
       </div>
       <div className="flex gap-2 items-center">
-        <Button onClick={() => setResolution("2k")} disabled={resolution === "2k"}>
+        <Button
+          onClick={() => setResolution("2k")}
+          disabled={resolution === "2k"}
+        >
           2k
         </Button>
-        <Button onClick={() => setResolution("1080p")} disabled={resolution === "1080p"}>
+        <Button
+          onClick={() => setResolution("1080p")}
+          disabled={resolution === "1080p"}
+        >
           1080p
         </Button>
-        <Button onClick={() => setResolution("720p")} disabled={resolution === "720p"}>
+        <Button
+          onClick={() => setResolution("720p")}
+          disabled={resolution === "720p"}
+        >
           720p
         </Button>
       </div>

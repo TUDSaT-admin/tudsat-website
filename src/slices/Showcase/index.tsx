@@ -11,14 +11,16 @@ export type ShowcaseProps = SliceComponentProps<Content.ShowcaseSlice>;
 /**
  * Component for "Showcase" Slices.
  */
-const Showcase = ({ slice }: ShowcaseProps): JSX.Element => {
+const Showcase = ({ slice }: ShowcaseProps) => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       withExtraPadding
     >
-      <h2 className="mb-32 text-3xl font-bold text-center">{slice.primary.title}</h2>
+      <h2 className="mb-32 text-3xl font-bold text-center">
+        {slice.primary.title}
+      </h2>
       <div className="flex flex-col md:flex-row gap-16 justify-center items-center">
         {slice.items.map((item) => (
           <PrismicNextLink
@@ -26,7 +28,11 @@ const Showcase = ({ slice }: ShowcaseProps): JSX.Element => {
             field={item.link}
             className="relative cursor-pointer overflow-hidden flex-col w-72 h-96 rounded-xl shadow-lg shadow-primary/10 group"
           >
-            <PrismicNextImage field={item.background_image} className="object-cover" fill />
+            <PrismicNextImage
+              field={item.background_image}
+              className="object-cover"
+              fill
+            />
             <div
               className={
                 "p-3 h-1/4 ease-in transition-all backdrop-blur-md group-hover:backdrop-blur-lg text-white group-hover:bg-white group-hover:h-1/3 overflow-hidden"

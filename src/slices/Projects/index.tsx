@@ -11,7 +11,7 @@ export type ProjectsProps = SliceComponentProps<Content.ProjectsSlice>;
 /**
  * Component for "Projects" Slices.
  */
-const Projects = ({ slice }: ProjectsProps): JSX.Element => {
+const Projects = ({ slice }: ProjectsProps) => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}

@@ -5,14 +5,18 @@ import { SliceComponentProps } from "@prismicio/react";
 /**
  * Props for `MembershipForm`.
  */
-export type MembershipFormProps = SliceComponentProps<Content.MembershipFormSlice>;
+export type MembershipFormProps =
+  SliceComponentProps<Content.MembershipFormSlice>;
 
 /**
  * Component for "MembershipForm" Slices.
  */
-const MembershipForm = ({ slice }: MembershipFormProps): JSX.Element => {
+const MembershipForm = ({ slice }: MembershipFormProps) => {
   return (
-    <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+    <Bounded
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+    >
       <iframe
         title="Membership Form"
         src="https://easyverein.com/public/TUDSaT/applicationform/1979?iframe=True"

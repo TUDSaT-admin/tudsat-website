@@ -1,5 +1,3 @@
-"use client";
-
 import Bounded from "@/components/bounded";
 import Marquee from "@/components/ui/marquee";
 import { Button } from "@/components/ui/button";
@@ -18,11 +16,16 @@ export type SponsorsProps = SliceComponentProps<Content.SponsorsSlice>;
  */
 const Sponsors = async ({ slice }: SponsorsProps) => {
   const client = createClient();
-  const sponsors = await client.getSingle("sponsors");
-  const categories = [...new Set(sponsors.data.sponsors.map((sponsor) => sponsor.category))];
+  const sponsors: Content.SponsorsDocumentDataSponsorsItem[] = (
+    await client.getSingle("sponsors")
+  ).data.sponsors;
+  const categories = [...new Set(sponsors.map((sponsor) => sponsor.category))];
 
   return (
-    <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+    <Bounded
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+    >
       {slice.variation === "full" ? (
         <div className="flex flex-col gap-16 pt-12">
           {categories.map((category) => (
@@ -32,15 +35,17 @@ const Sponsors = async ({ slice }: SponsorsProps) => {
               </h2>
 
               <SponsorGrid>
-                {sponsors.data.sponsors
+                {sponsors
                   .filter((sponsor) => sponsor.category === category)
                   .map((sponsor) =>
-                    // biome-ignore lint/correctness/useJsxKeyInIterable: <explanation>
                     sponsor.highlight ? (
-                      <HighlightedSponsor key={sponsor.name} sponsor={sponsor} />
+                      <HighlightedSponsor
+                        key={sponsor.name}
+                        sponsor={sponsor}
+                      />
                     ) : (
                       <SponsorCard key={sponsor.name} sponsor={sponsor} />
-                    ),
+                    )
                   )}
               </SponsorGrid>
             </div>
@@ -51,10 +56,12 @@ const Sponsors = async ({ slice }: SponsorsProps) => {
           <h2 className="text-center mb-12 md:mb-28 text-lg font-semibold leading-8">
             {slice.primary.title}
           </h2>
-          <SponsorCarousel sponsors={sponsors.data.sponsors} />
+          <SponsorCarousel sponsors={sponsors} />
           <div className="flex justify-center mt-12">
             <Button variant="link" asChild>
-              <PrismicNextLink field={slice.primary.sponsors_page}>View More</PrismicNextLink>
+              <PrismicNextLink field={slice.primary.sponsors_page}>
+                View More
+              </PrismicNextLink>
             </Button>
           </div>
         </div>
@@ -71,24 +78,38 @@ const SponsorGrid = ({ children }: { children: ReactNode[] }) => {
   );
 };
 
-const SponsorCard = ({ sponsor }: { sponsor: Content.SponsorsDocumentDataSponsorsItem }) => {
+const SponsorCard = ({
+  sponsor,
+}: {
+  sponsor: Content.SponsorsDocumentDataSponsorsItem;
+}) => {
   return (
     <PrismicNextLink
       field={sponsor.link}
       className="p-4 flex items-center justify-center shadow-md bg-white rounded-lg ring-2 ring-accent/90"
     >
-      <PrismicNextImage field={sponsor.logo} className="object-contain h-20 w-auto" />
+      <PrismicNextImage
+        field={sponsor.logo}
+        className="object-contain h-20 w-auto"
+      />
     </PrismicNextLink>
   );
 };
 
-const HighlightedSponsor = ({ sponsor }: { sponsor: Content.SponsorsDocumentDataSponsorsItem }) => {
+const HighlightedSponsor = ({
+  sponsor,
+}: {
+  sponsor: Content.SponsorsDocumentDataSponsorsItem;
+}) => {
   return (
     <PrismicNextLink
       field={sponsor.link}
       className="p-4 flex col-span-full justify-center shadow-md bg-white rounded-lg ring-8 ring-secondary/90"
     >
-      <PrismicNextImage field={sponsor.logo} className="object-contain h-48 w-auto" />
+      <PrismicNextImage
+        field={sponsor.logo}
+        className="object-contain h-48 w-auto"
+      />
     </PrismicNextLink>
   );
 };
@@ -111,7 +132,9 @@ const SponsorCarousel = ({
               <PrismicNextImage
                 field={sponsor.logo}
                 className="object-contain h-20 w-auto bg-white p-4 rounded-md hover:bg-slate-300/40 transition-colors duration-300"
-                style={{ filter: "drop-shadow(-3px -3px 6px rgba(255,255,255,0.2))" }}
+                style={{
+                  filter: "drop-shadow(-3px -3px 6px rgba(255,255,255,0.2))",
+                }}
               />
             </PrismicNextLink>
           </div>
@@ -128,7 +151,9 @@ const SponsorCarousel = ({
               <PrismicNextImage
                 field={sponsor.logo}
                 className="object-contain h-20 w-auto bg-white p-4 rounded-md hover:bg-slate-100/80 transition-colors duration-300"
-                style={{ filter: "drop-shadow(-3px -3px 6px rgba(255,255,255,0.2))" }}
+                style={{
+                  filter: "drop-shadow(-3px -3px 6px rgba(255,255,255,0.2))",
+                }}
               />
             </PrismicNextLink>
           </div>

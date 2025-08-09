@@ -11,7 +11,7 @@ export type TeamsProps = SliceComponentProps<Content.TeamsSlice>;
 /**
  * Component for "Teams" Slices.
  */
-const Teams = ({ slice }: TeamsProps): JSX.Element => {
+const Teams = ({ slice }: TeamsProps) => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}

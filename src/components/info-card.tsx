@@ -1,5 +1,5 @@
-import { KeyTextField, isFilled } from "@prismicio/client";
-import { Icons, RenderIcon } from "./icons";
+import { KeyTextField } from "@prismicio/client";
+import { RenderIcon } from "./icons";
 import { Card } from "./ui/card";
 
 export function InfoCard({
@@ -12,7 +12,7 @@ export function InfoCard({
   title: KeyTextField;
   description: KeyTextField;
   isTransparent?: boolean;
-}): JSX.Element {
+}) {
   const WrapperComponent = isTransparent ? "div" : Card;
   return (
     <WrapperComponent className="flex items-center p-4 flex-1">

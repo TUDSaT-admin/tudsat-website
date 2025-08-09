@@ -14,7 +14,7 @@ export type CallToActionProps = SliceComponentProps<Content.CallToActionSlice>;
 /**
  * Component for "CallToAction" Slices.
  */
-const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
+const CallToAction = ({ slice }: CallToActionProps) => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -27,7 +27,13 @@ const CallToAction = ({ slice }: CallToActionProps): JSX.Element => {
           className="absolute left-1/2 top-1/2 bg-gradient-to-r from-accent to-transparent -z-10 h-[64rem] w-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0"
           aria-hidden="true"
         >
-          <circle cx={512} cy={512} r={512} fill="url(#gradient)" fillOpacity="1" />
+          <circle
+            cx={512}
+            cy={512}
+            r={512}
+            fill="url(#gradient)"
+            fillOpacity="1"
+          />
         </svg>
         <div className="flex w-full flex-col lg:flex-row gap-6 items-center justify-center">
           <div className="max-w-md my-8 lg:flex-auto text-left">

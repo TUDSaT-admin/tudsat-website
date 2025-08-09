@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import type { Content } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import type { SliceComponentProps } from "@prismicio/react";
-import Image from "next/image";
 
 /**
  * Props for `Hero`.
@@ -13,9 +12,12 @@ export type HeroProps = SliceComponentProps<Content.HeroSlice>;
 /**
  * Component for "Hero" Slices.
  */
-const Hero = ({ slice }: HeroProps): JSX.Element => {
+const Hero = ({ slice }: HeroProps) => {
   return (
-    <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+    <Bounded
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+    >
       <div className="absolute top-0  w-full h-full  overflow-hidden">
         <div className="absolute w-full h-full top-0 left-0 -z-30">
           <PrismicNextImage
@@ -26,7 +28,10 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
           />
         </div>
         <div className="absolute w-[80vmin] h-[80vmin] -translate-x-[50%] -translate-y-[50%] top-[50%] left-[50%] -z-30">
-          <div className="w-full h-full animate-spin" style={{ animationDuration: "60s" }}>
+          <div
+            className="w-full h-full animate-spin"
+            style={{ animationDuration: "60s" }}
+          >
             <PrismicNextImage
               height={300}
               width={300}
@@ -50,7 +55,9 @@ const Hero = ({ slice }: HeroProps): JSX.Element => {
                 <Button>{slice.primary.cta_primary_text}</Button>
               </PrismicNextLink>
               <PrismicNextLink field={slice.primary.cta_secondary_link}>
-                <Button variant="link">{slice.primary.cta_secondary_text}</Button>
+                <Button variant="link">
+                  {slice.primary.cta_secondary_text}
+                </Button>
               </PrismicNextLink>
             </div>
           </div>

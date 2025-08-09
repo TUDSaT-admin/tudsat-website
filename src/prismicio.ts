@@ -5,7 +5,8 @@ import config from "../slicemachine.config.json";
 /**
  * The project's Prismic repository name.
  */
-export const repositoryName = process.env.NEXT_PUBLIC_PRISMIC_ENVIRONMENT || config.repositoryName;
+export const repositoryName =
+  process.env.NEXT_PUBLIC_PRISMIC_ENVIRONMENT || config.repositoryName;
 
 if (process.env.NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN == null) {
   throw new Error("Missing Prismic access token");
@@ -33,7 +34,7 @@ const routes: prismic.ClientConfig["routes"] = [
  *
  * @param config - Configuration for the Prismic client.
  */
-export const createClient = (config: prismicNext.CreateClientConfig = {}) => {
+export const createClient = (config: prismic.ClientConfig = {}) => {
   const client = prismic.createClient(repositoryName, {
     accessToken: process.env.NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN,
     routes,
@@ -46,8 +47,6 @@ export const createClient = (config: prismicNext.CreateClientConfig = {}) => {
 
   prismicNext.enableAutoPreviews({
     client,
-    previewData: config.previewData,
-    req: config.req,
   });
 
   return client;

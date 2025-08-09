@@ -11,7 +11,7 @@ export type SubsectionsProps = SliceComponentProps<Content.SubsectionsSlice>;
 /**
  * Component for "Subsections" Slices.
  */
-const Subsections = ({ slice }: SubsectionsProps): JSX.Element => {
+const Subsections = ({ slice }: SubsectionsProps) => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}

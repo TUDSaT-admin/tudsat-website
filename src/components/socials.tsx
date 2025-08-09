@@ -2,14 +2,17 @@ import { createClient } from "@/prismicio";
 import { PrismicNextLink } from "@prismicio/next";
 import { buttonVariants } from "./ui/button";
 import { Icons } from "./icons";
+import { Content } from "@prismicio/client";
 
 export async function Socials() {
   const client = createClient();
-  const settings = await client.getSingle("settings");
+  const socials: Content.SettingsDocumentDataSocialsItem[] = (
+    await client.getSingle("settings")
+  ).data.socials;
 
   return (
     <div className="flex gap-1">
-      {settings.data.socials.map((social) => (
+      {socials.map((social) => (
         <PrismicNextLink
           field={social.link}
           key={social.social_platform}

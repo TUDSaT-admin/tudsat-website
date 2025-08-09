@@ -11,7 +11,7 @@ export type InfoHeaderProps = SliceComponentProps<Content.InfoHeaderSlice>;
 /**
  * Component for "InfoHeader" Slices.
  */
-const InfoHeader = ({ slice }: InfoHeaderProps): JSX.Element => {
+const InfoHeader = ({ slice }: InfoHeaderProps) => {
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -26,19 +26,31 @@ const InfoHeader = ({ slice }: InfoHeaderProps): JSX.Element => {
         <div className="md:w-72">
           <PrismicNextImage
             field={slice.primary.logo}
-            style={{ filter: "drop-shadow(-4px -4px 10px rgba(255,255,255,0.4))" }}
+            style={{
+              filter: "drop-shadow(-4px -4px 10px rgba(255,255,255,0.4))",
+            }}
           />
         </div>
       </div>
       <div className="flex flex-col p-4 md:p-0 md:flex-row gap-4 ">
-        <InfoCard icon="userRound" description={slice.primary.lead} title="Lead" isTransparent />
+        <InfoCard
+          icon="userRound"
+          description={slice.primary.lead}
+          title="Lead"
+          isTransparent
+        />
         <InfoCard
           icon="calendar"
           description={slice.primary.meeting}
           title="Meeting"
           isTransparent
         />
-        <InfoCard icon="mail" description={slice.primary.email} title="Email" isTransparent />
+        <InfoCard
+          icon="mail"
+          description={slice.primary.email}
+          title="Email"
+          isTransparent
+        />
       </div>
     </section>
   );

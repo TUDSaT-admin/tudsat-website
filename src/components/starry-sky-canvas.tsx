@@ -3,6 +3,7 @@
 import { Stars } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useRef } from "react";
+import { Group } from "three";
 
 export default function StarrySkyCanvas() {
   return (
@@ -15,7 +16,7 @@ export default function StarrySkyCanvas() {
 }
 
 function StarsCanvas() {
-  const starsRef = useRef<THREE.Group>(null);
+  const starsRef = useRef<Group>(null);
 
   useFrame(() => {
     if (starsRef.current) {
@@ -25,7 +26,15 @@ function StarsCanvas() {
   });
   return (
     <group ref={starsRef}>
-      <Stars radius={50} depth={400} count={1000} factor={16} saturation={0} fade speed={2} />
+      <Stars
+        radius={50}
+        depth={400}
+        count={1000}
+        factor={16}
+        saturation={0}
+        fade
+        speed={2}
+      />
     </group>
   );
 }

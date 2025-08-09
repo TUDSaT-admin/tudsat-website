@@ -7,8 +7,8 @@ export async function AnnouncementBanner() {
   let announcement: AnnouncementDocument;
   try {
     announcement = await client.getSingle("announcement");
-  } catch (e) {
-    return <></>;
+  } catch {
+    return;
   }
   const {
     data: { title, description, active, activation_date, expiry_date },
@@ -16,14 +16,14 @@ export async function AnnouncementBanner() {
 
   const currentDate = new Date();
   if (active === false) {
-    return <></>;
+    return;
   }
 
   if (expiry_date && activation_date) {
     const expiryDate = new Date(expiry_date);
     const activiationDate = new Date(activation_date);
     if (currentDate > expiryDate || currentDate < activiationDate) {
-      return <></>;
+      return;
     }
   }
   return (
