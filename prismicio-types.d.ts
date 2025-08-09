@@ -15,8 +15,8 @@ type PickContentRelationshipFieldData<
     prismic.AnyRegularField | prismic.GroupField | prismic.NestedGroupField | prismic.SliceZone
   >,
   TLang extends string,
-> = // Content relationship fields
-{
+> = {
+  // Content relationship fields
   [TSubRelationship in Extract<
     TRelationship["fields"][number],
     prismic.CustomTypeModelFetchContentRelationshipLevel1

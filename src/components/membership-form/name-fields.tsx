@@ -5,11 +5,7 @@ import { formSchema } from "./membership-form";
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Input } from "../ui/input";
 
-export default function NameFields({
-  form,
-}: {
-  form: UseFormReturn<z.infer<typeof formSchema>>;
-}) {
+export default function NameFields({ form }: { form: UseFormReturn<z.infer<typeof formSchema>> }) {
   return (
     <>
       <FormField

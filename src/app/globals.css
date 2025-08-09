@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @layer base {
   :root {
     --background: 248 100% 97%;
@@ -25,7 +25,7 @@
     --ring: 219 48% 40%;
     --radius: 0.5rem;
   }
- 
+
   .dark {
     --background: 248 100% 3%;
     --foreground: 249 37% 93%;
@@ -49,10 +49,15 @@
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-orbitron), sans-serif; 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-orbitron), sans-serif;
 }
 
 body {
-  font-family: var(--font-plus-jakarta-sans), sans-serif; 
+  font-family: var(--font-plus-jakarta-sans), sans-serif;
 }

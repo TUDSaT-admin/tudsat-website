@@ -84,7 +84,10 @@ export default TeamMembers;
 function TeamMemberCard({
   member,
   color,
-}: { member: Content.TeamMembersDocumentDataTeamMembersItem; color?: ColorField }) {
+}: {
+  member: Content.TeamMembersDocumentDataTeamMembersItem;
+  color?: ColorField;
+}) {
   return (
     <Card
       key={member.name}

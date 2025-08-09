@@ -95,7 +95,9 @@ const HighlightedSponsor = ({ sponsor }: { sponsor: Content.SponsorsDocumentData
 
 const SponsorCarousel = ({
   sponsors,
-}: { sponsors: Content.SponsorsDocumentDataSponsorsItem[] }) => {
+}: {
+  sponsors: Content.SponsorsDocumentDataSponsorsItem[];
+}) => {
   return (
     <div className="relative max-w-[100vw] w-full flex-col items-center justify-center overflow-hidden">
       <Marquee>

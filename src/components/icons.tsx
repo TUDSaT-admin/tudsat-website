@@ -21,7 +21,6 @@ import {
   Laptop,
   Loader2,
   LucideIcon,
-  LucideProps,
   Mail,
   Moon,
   MoreVertical,

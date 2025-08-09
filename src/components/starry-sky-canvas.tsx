@@ -1,6 +1,6 @@
 "use client";
 
-import { PerspectiveCamera, Stars } from "@react-three/drei";
+import { Stars } from "@react-three/drei";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 
