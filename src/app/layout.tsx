@@ -19,8 +19,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
 
 const metadataTitle = "TUDSaT";
-const metadataDescription =
-  "TUDSaT is a space focused student association at TU Darmstadt.";
+const metadataDescription = "TUDSaT is a space focused student association at TU Darmstadt.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://tudsat.space"),
@@ -42,18 +41,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body
         className={cn(
           orbitron.variable,
           plusJakartaSans.variable,
-          "bg-background min-h-screen flex flex-col"
+          "bg-background min-h-screen flex flex-col",
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="dark">
