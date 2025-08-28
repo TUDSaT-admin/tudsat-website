@@ -33,16 +33,13 @@ const Calendar = ({ slice }: CalendarProps) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <div className="h-[72rem] flex items-center justify-center">
-        <iframe
-          title="Calendar"
-          src={url}
-          style={{
-            border: "none",
-          }}
-          className="w-[72rem] aspect-video"
-        />
-      </div>
+      <iframe
+        title="Calendar"
+        src={url}
+        style={{
+          border: "none",
+        }}
+      />
       <div className="flex gap-2 items-center">
         <Button
           onClick={() => setCalendar("default")}
