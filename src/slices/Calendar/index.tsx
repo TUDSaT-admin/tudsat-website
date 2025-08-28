@@ -34,6 +34,7 @@ const Calendar = ({ slice }: CalendarProps) => {
       data-slice-variation={slice.variation}
     >
       <iframe
+        className="h-fit w-full"
         title="Calendar"
         src={url}
         style={{
