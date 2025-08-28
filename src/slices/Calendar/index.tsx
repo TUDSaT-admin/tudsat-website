@@ -49,7 +49,7 @@ const Calendar = ({ slice }: CalendarProps) => {
       <div className="w-full bg-primary text-primary-foreground rounded-lg p-4">
         <FullCalendar
           plugins={[dayGridPlugin, iCalendarPlugin, timeGridPlugin]}
-          initialView="timeGridWeek"
+          initialView="dayGridMonth"
           events={eventSource}
           eventTimeFormat={{
             hour: "2-digit",
