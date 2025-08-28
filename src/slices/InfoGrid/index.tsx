@@ -13,10 +13,7 @@ export type InfoGridProps = SliceComponentProps<Content.InfoGridSlice>;
  */
 const InfoGrid = ({ slice }: InfoGridProps) => {
   return (
-    <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
+    <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
       <h2 className="text-4xl font-bold mb-6">{slice.primary.title}</h2>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {slice.items.map((item) => (

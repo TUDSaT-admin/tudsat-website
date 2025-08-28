@@ -16,16 +16,12 @@ export type SponsorsProps = SliceComponentProps<Content.SponsorsSlice>;
  */
 const Sponsors = async ({ slice }: SponsorsProps) => {
   const client = createClient();
-  const sponsors: Content.SponsorsDocumentDataSponsorsItem[] = (
-    await client.getSingle("sponsors")
-  ).data.sponsors;
+  const sponsors: Content.SponsorsDocumentDataSponsorsItem[] = (await client.getSingle("sponsors"))
+    .data.sponsors;
   const categories = [...new Set(sponsors.map((sponsor) => sponsor.category))];
 
   return (
-    <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
+    <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
       {slice.variation === "full" ? (
         <div className="flex flex-col gap-16 pt-12">
           {categories.map((category) => (
@@ -39,13 +35,10 @@ const Sponsors = async ({ slice }: SponsorsProps) => {
                   .filter((sponsor) => sponsor.category === category)
                   .map((sponsor) =>
                     sponsor.highlight ? (
-                      <HighlightedSponsor
-                        key={sponsor.name}
-                        sponsor={sponsor}
-                      />
+                      <HighlightedSponsor key={sponsor.name} sponsor={sponsor} />
                     ) : (
                       <SponsorCard key={sponsor.name} sponsor={sponsor} />
-                    )
+                    ),
                   )}
               </SponsorGrid>
             </div>
@@ -59,9 +52,7 @@ const Sponsors = async ({ slice }: SponsorsProps) => {
           <SponsorCarousel sponsors={sponsors} />
           <div className="flex justify-center mt-12">
             <Button variant="link" asChild>
-              <PrismicNextLink field={slice.primary.sponsors_page}>
-                View More
-              </PrismicNextLink>
+              <PrismicNextLink field={slice.primary.sponsors_page}>View More</PrismicNextLink>
             </Button>
           </div>
         </div>
@@ -78,40 +69,24 @@ const SponsorGrid = ({ children }: { children: ReactNode[] }) => {
   );
 };
 
-const SponsorCard = ({
-  sponsor,
-}: {
-  sponsor: Content.SponsorsDocumentDataSponsorsItem;
-}) => {
+const SponsorCard = ({ sponsor }: { sponsor: Content.SponsorsDocumentDataSponsorsItem }) => {
   return (
     <PrismicNextLink
       field={sponsor.link}
       className="p-4 flex items-center justify-center shadow-md bg-white rounded-lg ring-2 ring-accent/90"
     >
-      <PrismicNextImage
-        alt=""
-        field={sponsor.logo}
-        className="object-contain h-20 w-auto"
-      />
+      <PrismicNextImage alt="" field={sponsor.logo} className="object-contain h-20 w-auto" />
     </PrismicNextLink>
   );
 };
 
-const HighlightedSponsor = ({
-  sponsor,
-}: {
-  sponsor: Content.SponsorsDocumentDataSponsorsItem;
-}) => {
+const HighlightedSponsor = ({ sponsor }: { sponsor: Content.SponsorsDocumentDataSponsorsItem }) => {
   return (
     <PrismicNextLink
       field={sponsor.link}
       className="p-4 flex col-span-full justify-center shadow-md bg-white rounded-lg ring-8 ring-secondary/90"
     >
-      <PrismicNextImage
-        alt=""
-        field={sponsor.logo}
-        className="object-contain h-48 w-auto"
-      />
+      <PrismicNextImage alt="" field={sponsor.logo} className="object-contain h-48 w-auto" />
     </PrismicNextLink>
   );
 };

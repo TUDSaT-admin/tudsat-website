@@ -26,15 +26,7 @@ function StarsCanvas() {
   });
   return (
     <group ref={starsRef}>
-      <Stars
-        radius={50}
-        depth={400}
-        count={1000}
-        factor={16}
-        saturation={0}
-        fade
-        speed={2}
-      />
+      <Stars radius={50} depth={400} count={1000} factor={16} saturation={0} fade speed={2} />
     </group>
   );
 }

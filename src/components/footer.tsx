@@ -15,21 +15,16 @@ export default async function Footer() {
       <Image src="tudsat_logo.svg" alt="logo" width={52} height={52} />
       <nav>
         <ul className="flex">
-          {footer.data.navigation.map(
-            (item: Content.FooterDocumentDataNavigationItem) => (
-              <li key={item.label}>
-                <PrismicNextLink
-                  field={item.link}
-                  className={cn(
-                    buttonVariants({ variant: "link" }),
-                    "text-secondary-foreground"
-                  )}
-                >
-                  {item.label}
-                </PrismicNextLink>
-              </li>
-            )
-          )}
+          {footer.data.navigation.map((item: Content.FooterDocumentDataNavigationItem) => (
+            <li key={item.label}>
+              <PrismicNextLink
+                field={item.link}
+                className={cn(buttonVariants({ variant: "link" }), "text-secondary-foreground")}
+              >
+                {item.label}
+              </PrismicNextLink>
+            </li>
+          ))}
         </ul>
       </nav>
       <Socials />

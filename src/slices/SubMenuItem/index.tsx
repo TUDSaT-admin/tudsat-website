@@ -12,13 +12,8 @@ export type SubMenuItemProps = SliceComponentProps<Content.SubMenuItemSlice>;
  */
 const SubMenuItem = ({ slice }: SubMenuItemProps) => {
   return (
-    <div
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
-      <PrismicNextLink field={slice.primary.link}>
-        {slice.primary.label}
-      </PrismicNextLink>
+    <div data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
+      <PrismicNextLink field={slice.primary.link}>{slice.primary.label}</PrismicNextLink>
     </div>
   );
 };

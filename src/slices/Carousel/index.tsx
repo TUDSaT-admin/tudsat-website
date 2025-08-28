@@ -1,9 +1,5 @@
 import Bounded from "@/components/bounded";
-import {
-  Carousel as CarouselEmbla,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
+import { Carousel as CarouselEmbla, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
@@ -18,10 +14,7 @@ export type CarouselProps = SliceComponentProps<Content.CarouselSlice>;
  */
 const Carousel = ({ slice }: CarouselProps) => {
   return (
-    <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
+    <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
       <CarouselEmbla
         opts={{
           align: "start",

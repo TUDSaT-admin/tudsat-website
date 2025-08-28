@@ -1,12 +1,7 @@
 "use client";
 
 import Bounded from "@/components/bounded";
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
+import { Carousel, CarouselApi, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 import { Content, ImageFieldImage, KeyTextField } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
@@ -70,7 +65,7 @@ const Testemonials = ({ slice }: TestemonialsProps) => {
               onClick={() => api?.scrollTo(index)}
               className={cn(
                 "w-4 h-1 rounded-full cursor-pointer bg-white/20 transition-all duration-1000",
-                index === selectedIndex && "bg-primary w-8"
+                index === selectedIndex && "bg-primary w-8",
               )}
             />
           ))}

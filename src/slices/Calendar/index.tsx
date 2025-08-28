@@ -4,10 +4,10 @@ import { useState, useMemo } from "react";
 import Bounded from "@/components/bounded";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
-import iCalendarPlugin from '@fullcalendar/icalendar'
-import timeGridPlugin from '@fullcalendar/timegrid'
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import iCalendarPlugin from "@fullcalendar/icalendar";
+import timeGridPlugin from "@fullcalendar/timegrid";
 import { EventSourceInput } from "@fullcalendar/core/index.js";
 
 /**
@@ -45,10 +45,7 @@ const Calendar = ({ slice }: CalendarProps) => {
   }, [calendar]);
 
   return (
-    <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
+    <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
       <div className="w-full aspect-video bg-primary text-primary-foreground rounded-lg p-4">
         <FullCalendar
           plugins={[dayGridPlugin, iCalendarPlugin, timeGridPlugin]}

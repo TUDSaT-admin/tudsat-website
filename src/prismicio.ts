@@ -5,8 +5,7 @@ import config from "../slicemachine.config.json";
 /**
  * The project's Prismic repository name.
  */
-export const repositoryName =
-  process.env.NEXT_PUBLIC_PRISMIC_ENVIRONMENT || config.repositoryName;
+export const repositoryName = process.env.NEXT_PUBLIC_PRISMIC_ENVIRONMENT || config.repositoryName;
 
 if (process.env.NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN == null) {
   throw new Error("Missing Prismic access token");

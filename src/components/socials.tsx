@@ -6,9 +6,8 @@ import { Content } from "@prismicio/client";
 
 export async function Socials() {
   const client = createClient();
-  const socials: Content.SettingsDocumentDataSocialsItem[] = (
-    await client.getSingle("settings")
-  ).data.socials;
+  const socials: Content.SettingsDocumentDataSocialsItem[] = (await client.getSingle("settings"))
+    .data.socials;
 
   return (
     <div className="flex gap-1">

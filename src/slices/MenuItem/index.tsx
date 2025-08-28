@@ -12,10 +12,7 @@ export type MenuItemProps = SliceComponentProps<Content.MenuItemSlice>;
  */
 const MenuItem = ({ slice }: MenuItemProps) => {
   return (
-    <section
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
+    <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
       {slice.primary.label}
       {slice.variation === "withSubMenu" && (
         <PrismicNextLink field={slice.primary.sub_menu}>Link</PrismicNextLink>
