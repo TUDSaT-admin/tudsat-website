@@ -25,6 +25,7 @@ const InfoHeader = ({ slice }: InfoHeaderProps) => {
         </div>
         <div className="md:w-72">
           <PrismicNextImage
+            alt=""
             field={slice.primary.logo}
             style={{
               filter: "drop-shadow(-4px -4px 10px rgba(255,255,255,0.4))",

@@ -105,6 +105,7 @@ function TeamMemberCard({
       }}
     >
       <PrismicNextImage
+        alt=""
         field={member.image}
         width={150}
         height={150}

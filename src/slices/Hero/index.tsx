@@ -21,6 +21,7 @@ const Hero = ({ slice }: HeroProps) => {
       <div className="absolute top-0  w-full h-full  overflow-hidden">
         <div className="absolute w-full h-full top-0 left-0 -z-30">
           <PrismicNextImage
+            alt=""
             height={300}
             width={300}
             className="absolute transform-gpu origin-top-left animate-fly h-[300px] w-auto object-contain  md:-rotate-[15deg] md:h-[400px]"
@@ -33,6 +34,7 @@ const Hero = ({ slice }: HeroProps) => {
             style={{ animationDuration: "60s" }}
           >
             <PrismicNextImage
+              alt=""
               height={300}
               width={300}
               className="h-[100px] w-auto object-contain md:h-[150px] -rotate-[30deg]"

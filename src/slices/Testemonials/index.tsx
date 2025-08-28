@@ -63,7 +63,8 @@ const Testemonials = ({ slice }: TestemonialsProps) => {
         </CarouselContent>
         <div className="flex justify-center mt-6 gap-4">
           {slice.items.map((testemonial, index) => (
-            // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+            // biome-ignore lint/a11y/noStaticElementInteractions: wtf?
+            // biome-ignore lint/a11y/useKeyWithClickEvents: wtf?
             <div
               key={testemonial.name}
               onClick={() => api?.scrollTo(index)}
@@ -98,6 +99,7 @@ function Testemonial({
         </blockquote>
         <figcaption className="mt-10">
           <PrismicNextImage
+            alt=""
             width={62}
             height={62}
             className="h-[62px] mx-auto rounded-full shadow-lg object-cover"

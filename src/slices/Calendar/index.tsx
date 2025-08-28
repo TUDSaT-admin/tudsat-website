@@ -34,14 +34,14 @@ const Calendar = ({ slice }: CalendarProps) => {
       data-slice-variation={slice.variation}
     >
       <iframe
-        className="h-fit w-full"
+        className="w-full aspect-video"
         title="Calendar"
         src={url}
         style={{
           border: "none",
         }}
       />
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 items-center mt-4">
         <Button
           onClick={() => setCalendar("default")}
           disabled={calendar === "default"}

@@ -32,6 +32,7 @@ const Teams = ({ slice }: TeamsProps) => {
               <h3 className="text-3xl font-medium">{item.name}</h3>
             </PrismicNextLink>
             <PrismicNextImage
+              alt=""
               className="absolute inset-0 w-full h-full object-cover"
               field={item.image}
             />

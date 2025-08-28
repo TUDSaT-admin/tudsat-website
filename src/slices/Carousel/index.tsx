@@ -36,6 +36,7 @@ const Carousel = ({ slice }: CarouselProps) => {
               className="rounnded-lg overflow-hidden w-full h-full"
             >
               <PrismicNextImage
+                alt=""
                 field={item.image}
                 className="w-full h-full object-contain"
               />

@@ -89,6 +89,7 @@ const SponsorCard = ({
       className="p-4 flex items-center justify-center shadow-md bg-white rounded-lg ring-2 ring-accent/90"
     >
       <PrismicNextImage
+        alt=""
         field={sponsor.logo}
         className="object-contain h-20 w-auto"
       />
@@ -107,6 +108,7 @@ const HighlightedSponsor = ({
       className="p-4 flex col-span-full justify-center shadow-md bg-white rounded-lg ring-8 ring-secondary/90"
     >
       <PrismicNextImage
+        alt=""
         field={sponsor.logo}
         className="object-contain h-48 w-auto"
       />
@@ -130,6 +132,7 @@ const SponsorCarousel = ({
           >
             <PrismicNextLink field={sponsor.link}>
               <PrismicNextImage
+                alt=""
                 field={sponsor.logo}
                 className="object-contain h-20 w-auto bg-white p-4 rounded-md hover:bg-slate-300/40 transition-colors duration-300"
                 style={{
@@ -149,6 +152,7 @@ const SponsorCarousel = ({
           >
             <PrismicNextLink field={sponsor.link}>
               <PrismicNextImage
+                alt=""
                 field={sponsor.logo}
                 className="object-contain h-20 w-auto bg-white p-4 rounded-md hover:bg-slate-100/80 transition-colors duration-300"
                 style={{

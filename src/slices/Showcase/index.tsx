@@ -29,6 +29,7 @@ const Showcase = ({ slice }: ShowcaseProps) => {
             className="relative cursor-pointer overflow-hidden flex-col w-72 h-96 rounded-xl shadow-lg shadow-primary/10 group"
           >
             <PrismicNextImage
+              alt=""
               field={item.background_image}
               className="object-cover"
               fill
