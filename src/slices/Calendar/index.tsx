@@ -58,7 +58,7 @@ const Calendar = ({ slice }: CalendarProps) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
     >
-      <div className="w-full bg-primary text-primary-foreground rounded-lg p-4 max-h-screen">
+      <div className="w-full bg-primary text-primary-foreground rounded-lg p-4">
         <FullCalendar
           plugins={[iCalendarPlugin, timeGridPlugin]}
           initialView="timeGridWeek"
