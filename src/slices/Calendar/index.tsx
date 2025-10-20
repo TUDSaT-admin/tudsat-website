@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Bounded from "@/components/bounded";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
@@ -19,17 +19,21 @@ export type CalendarProps = SliceComponentProps<Content.CalendarSlice>;
  * Component for "Calendar" Slices.
  */
 const Calendar = ({ slice }: CalendarProps) => {
+  const [calendar, setCalendar] = useState<CalendarProps["slice"]["variation"]>(
+    slice.variation
+  );
+
   const router = useRouter();
 
   const eventSource = useMemo<EventSourceInput>(() => {
-    if (slice.variation === "trace") {
+    if (calendar === "trace") {
       return {
         url: `/api/calendar/wqoMRmsWDGxo2t2T`,
         format: "ics",
         color: "#007243",
       };
     }
-    if (slice.variation === "rapid") {
+    if (calendar === "rapid") {
       return {
         url: `/api/calendar/SFd5igN2ycteTbg3`,
         format: "ics",
@@ -41,17 +45,17 @@ const Calendar = ({ slice }: CalendarProps) => {
       format: "ics",
       color: "#2F4D86",
     };
-  }, [slice.variation]);
+  }, [calendar]);
 
   const link = useMemo(() => {
-    if (slice.variation === "trace") {
+    if (calendar === "trace") {
       return "https://cloud.bvsr.space/apps/calendar/p/wqoMRmsWDGxo2t2T";
     }
-    if (slice.variation === "rapid") {
+    if (calendar === "rapid") {
       return "https://cloud.bvsr.space/apps/calendar/p/SFd5igN2ycteTbg3";
     }
     return "https://cloud.bvsr.space/apps/calendar/p/TdefRGrLJDJAypKj";
-  }, [slice.variation]);
+  }, [calendar]);
 
   return (
     <Bounded
@@ -76,6 +80,24 @@ const Calendar = ({ slice }: CalendarProps) => {
           weekNumbers={true}
           weekNumberCalculation="ISO"
           customButtons={{
+            tudsat: {
+              text: "TUDSaT",
+              click: () => {
+                setCalendar("default");
+              },
+            },
+            trace: {
+              text: "TRACE",
+              click: () => {
+                setCalendar("trace");
+              },
+            },
+            rapid: {
+              text: "RAPID",
+              click: () => {
+                setCalendar("rapid");
+              },
+            },
             link: {
               text: "View full calendar",
               click: () => {
@@ -87,6 +109,10 @@ const Calendar = ({ slice }: CalendarProps) => {
             start: "link",
             center: "title",
             end: "today prev,next",
+          }}
+          footerToolbar={{
+            start: "link",
+            end: "tudsat,trace,rapid",
           }}
         />
       </div>
