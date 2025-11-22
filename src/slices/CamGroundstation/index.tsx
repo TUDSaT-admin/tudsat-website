@@ -31,14 +31,14 @@ const CamGroundstation = ({ slice }: CamGroundstationProps) => {
 
   return (
     <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-      <div className="h-[72rem] flex items-center justify-center">
+      <div className="h-288 flex items-center justify-center">
         <iframe
           title="Groundstation Livestream"
           src={url}
           style={{
             border: "none",
           }}
-          className="w-[72rem] aspect-video -rotate-90"
+          className="w-6xl aspect-video -rotate-90"
         />
       </div>
       <div className="flex gap-2 items-center">

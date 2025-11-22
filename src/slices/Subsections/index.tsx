@@ -23,7 +23,7 @@ const Subsections = ({ slice }: SubsectionsProps) => {
         {slice.items.map((item) => (
           <div
             key={item.name}
-            className="group flex flex-col aspect-[16/9] w-64 bg-slate-200 rounded-md relative overflow-hidden hover:shadow-lg hover:shadow-white/10 transition-shadow duration-300 cursor-pointer"
+            className="group flex flex-col aspect-video w-64 bg-slate-200 rounded-md relative overflow-hidden hover:shadow-lg hover:shadow-white/10 transition-shadow duration-300 cursor-pointer"
           >
             <PrismicNextLink
               field={item.link}
@@ -36,7 +36,7 @@ const Subsections = ({ slice }: SubsectionsProps) => {
               className="absolute inset-0 w-full h-full object-cover"
               field={item.image}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black from-20% to-transparent opacity-60 group-hover:opacity-70 transition-opacity duration-300 h-full" />
+            <div className="absolute inset-0 bg-linear-to-t from-black from-20% to-transparent opacity-60 group-hover:opacity-70 transition-opacity duration-300 h-full" />
           </div>
         ))}
       </div>

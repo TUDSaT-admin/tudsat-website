@@ -24,7 +24,7 @@ const CallToAction = ({ slice }: CallToActionProps) => {
       <Card className="relative isolate overflow-hidden p-4 md:p-16 w-full rounded-3xl">
         <svg
           viewBox="0 0 1024 1024"
-          className="absolute left-1/2 top-1/2 bg-gradient-to-r from-accent to-transparent -z-10 h-[64rem] w-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0"
+          className="absolute left-1/2 top-1/2 bg-linear-to-r from-accent to-transparent -z-10 h-256 w-5xl -translate-y-1/2 mask-[radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0"
           aria-hidden="true"
         >
           <circle cx={512} cy={512} r={512} fill="url(#gradient)" fillOpacity="1" />
@@ -56,7 +56,7 @@ const CallToAction = ({ slice }: CallToActionProps) => {
                   className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
                 />
 
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50" />
+                <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-gray-800 via-transparent to-transparent opacity-50" />
               </div>
 
               <div className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-80">
@@ -66,7 +66,7 @@ const CallToAction = ({ slice }: CallToActionProps) => {
                   className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
                 />
 
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50" />
+                <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-gray-800 via-transparent to-transparent opacity-50" />
               </div>
 
               <div className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:col-span-2 md:h-80">
@@ -76,7 +76,7 @@ const CallToAction = ({ slice }: CallToActionProps) => {
                   className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
                 />
 
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50" />
+                <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-gray-800 via-transparent to-transparent opacity-50" />
               </div>
 
               <div className="group relative flex h-48 items-end overflow-hidden rounded-lg bg-gray-100 shadow-lg md:h-80">
@@ -85,7 +85,7 @@ const CallToAction = ({ slice }: CallToActionProps) => {
                   field={slice.primary.image_4}
                   className="absolute inset-0 h-full w-full object-cover object-center transition duration-200 group-hover:scale-110"
                 />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-gray-800 via-transparent to-transparent opacity-50" />
+                <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-gray-800 via-transparent to-transparent opacity-50" />
               </div>
             </div>
           </div>

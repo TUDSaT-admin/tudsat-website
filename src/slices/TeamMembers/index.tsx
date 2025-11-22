@@ -41,7 +41,7 @@ const TeamMembers = async ({ slice }: TeamMembersProps) => {
           {sections.reverse().map((section) => (
             <div key={section}>
               <h2 className="mb-16 text-3xl font-bold">{section}</h2>
-              <div className="m-auto grid gap-x-6 gap-y-32 grid-cols-1 md:grid-cols-3 w-full md:max-w-screen-lg place-items-center">
+              <div className="m-auto grid gap-x-6 gap-y-32 grid-cols-1 md:grid-cols-3 w-full md:max-w-(--breakpoint-lg) place-items-center">
                 {teamMembers
                   .filter(
                     (member) =>
@@ -66,7 +66,7 @@ const TeamMembers = async ({ slice }: TeamMembersProps) => {
       ) : (
         <>
           <h2 className="mb-32 text-3xl font-bold">{slice.primary.title}</h2>
-          <div className="m-auto grid gap-x-6 gap-y-32 grid-cols-1 md:grid-cols-3 w-full md:max-w-screen-lg place-items-center">
+          <div className="m-auto grid gap-x-6 gap-y-32 grid-cols-1 md:grid-cols-3 w-full md:max-w-(--breakpoint-lg) place-items-center">
             {teamMembers
               .filter((member) => member.highlight)
               .map((member) => (
