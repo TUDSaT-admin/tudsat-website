@@ -1,5 +1,10 @@
 import Bounded from "@/components/bounded";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { isFilledRelatedData } from "@/lib/isFilledRelatedData";
 import { createClient } from "@/prismicio";
 import { ColorField, Content, isFilled } from "@prismicio/client";
@@ -21,8 +26,8 @@ const TeamMembers = async ({ slice }: TeamMembersProps) => {
       fetchLinks: ["section.name", "section.color"],
     })
   ).data.team_members;
-  const sections: string[] = (await client.getAllByType("section")).map(
-    (section) => section.data.name,
+  const sections = (await client.getAllByType("section")).map(
+    (section) => section.data.name
   );
 
   return (
@@ -41,7 +46,7 @@ const TeamMembers = async ({ slice }: TeamMembersProps) => {
                   .filter(
                     (member) =>
                       isFilledRelatedData(member.section, "section", "name") &&
-                      member.section.data.name === section,
+                      member.section.data.name === section
                   )
                   .map((member) => (
                     <TeamMemberCard
@@ -108,7 +113,9 @@ function TeamMemberCard({
       />
       <CardHeader className="text-center">
         <CardTitle className="text-xl">{member.name}</CardTitle>
-        <CardDescription className="text-accent tracking-widest">{member.position}</CardDescription>
+        <CardDescription className="text-accent tracking-widest">
+          {member.position}
+        </CardDescription>
       </CardHeader>
     </Card>
   );
