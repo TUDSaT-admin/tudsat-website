@@ -33,6 +33,16 @@
       "imageUrl": "",
       "primary": {},
       "items": {}
+    },
+    {
+      "id": "casimar",
+      "name": "CASIMAR",
+      "docURL": "...",
+      "version": "initial",
+      "description": "CASIMAR Calendar",
+      "imageUrl": "",
+      "primary": {},
+      "items": {}
     }
   ]
 }

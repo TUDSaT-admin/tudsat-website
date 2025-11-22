@@ -13,10 +13,7 @@ export type ProjectsProps = SliceComponentProps<Content.ProjectsSlice>;
  */
 const Projects = ({ slice }: ProjectsProps) => {
   return (
-    <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
+    <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         {slice.items.map((item) => (
           <div
