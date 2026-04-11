@@ -16,7 +16,7 @@ export type CalendarProps = SliceComponentProps<Content.CalendarSlice>;
  */
 const Calendar = ({ slice }: CalendarProps) => {
   const [calendar, setCalendar] = useState<CalendarProps["slice"]["variation"]>(
-    slice.variation
+    slice.variation,
   );
 
   const link = useMemo(() => {
@@ -43,7 +43,7 @@ const Calendar = ({ slice }: CalendarProps) => {
           border: "none",
         }}
         src={link}
-        className="w-full aspect-video"
+        className="w-full aspect-9/16 md:aspect-square xl:aspect-video"
       />
       <div className="flex gap-2 items-center">
         <Button
