@@ -1,0 +1,16 @@
+{
+  "repositoryName": "tudsat",
+  "adapter": "next",
+  "libraries": ["./src/slices"],
+  "localSliceSimulatorURL": "http://localhost:3000/slice-simulator",
+  "routes": [
+    {
+      "type": "home",
+      "path": "/"
+    },
+    {
+      "type": "page",
+      "path": "/:uid"
+    }
+  ]
+}

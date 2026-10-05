@@ -1,42 +1,26 @@
-import * as prismic from "@prismicio/client";
-import * as prismicNext from "@prismicio/next";
-import config from "../slicemachine.config.json";
+import {
+  createClient as baseCreateClient,
+  type ClientConfig,
+} from "@prismicio/client";
+import { enableAutoPreviews } from "@prismicio/next";
+import prismicConfig from "../prismic.config.json";
 
 /**
- * The project's Prismic repository name.
+ * Active repository / environment domain.
+ * `NEXT_PUBLIC_PRISMIC_ENVIRONMENT` is set by `npx prismic env set <domain>` for staging.
+ * @see https://prismic.io/docs/environments
  */
-export const repositoryName = process.env.NEXT_PUBLIC_PRISMIC_ENVIRONMENT || config.repositoryName;
-
-if (process.env.NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN == null) {
-  throw new Error("Missing Prismic access token");
-}
-
-/**
- * A list of Route Resolver objects that define how a document's `url` field is resolved.
- *
- * {@link https://prismic.io/docs/route-resolver#route-resolver}
- */
-const routes: prismic.ClientConfig["routes"] = [
-  {
-    type: "home",
-    path: "/",
-  },
-  {
-    type: "page",
-    path: "/:uid",
-  },
-];
+export const repositoryName =
+  process.env.NEXT_PUBLIC_PRISMIC_ENVIRONMENT || prismicConfig.repositoryName;
 
 /**
- * Creates a Prismic client for the project's repository. The client is used to
- * query content from the Prismic API.
- *
- * @param config - Configuration for the Prismic client.
+ * Creates a Prismic client for querying the Content API.
+ * Uses a server-only access token — never expose it with NEXT_PUBLIC_*.
  */
-export const createClient = (config: prismic.ClientConfig = {}) => {
-  const client = prismic.createClient(repositoryName, {
-    accessToken: process.env.NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN,
-    routes,
+export const createClient = (config: ClientConfig = {}) => {
+  const client = baseCreateClient(repositoryName, {
+    accessToken: process.env.PRISMIC_ACCESS_TOKEN,
+    routes: prismicConfig.routes,
     fetchOptions:
       process.env.NODE_ENV === "production"
         ? { next: { tags: ["prismic"] }, cache: "force-cache" }
@@ -44,9 +28,7 @@ export const createClient = (config: prismic.ClientConfig = {}) => {
     ...config,
   });
 
-  prismicNext.enableAutoPreviews({
-    client,
-  });
+  enableAutoPreviews({ client });
 
   return client;
 };
