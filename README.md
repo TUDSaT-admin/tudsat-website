@@ -11,9 +11,9 @@ Welcome to the public website of the Technische Universität Darmstadt Space Tec
 - [Scripts](#scripts)
 - [Technologies Used](#technologies-used)
 - [Project Structure](#project-structure)
-- [Prismic & Slices](#prismic--slices)
+- [Prismic Content Modeling](#prismic-content-modeling)
 - [Deployment](#deployment)
-- [Webhook Setup for Prismic & Vercel](#webhook-setup-for-prismic--vercel)
+- [Webhook Setup](#webhook-setup)
 - [Contribution Guidelines](#contribution-guidelines)
 - [Contact](#contact)
 
@@ -43,141 +43,89 @@ To run this project locally, ensure you have [Node.js](https://nodejs.org/en/) i
 
 4. Set up environment variables by following the instructions in the [Environment Variables](#environment-variables) section.
 
-5. Start the development server, including Prismic Slice Machine:
+5. Start the development server:
     ```bash
     bun dev
     ```
 
-The website will be available at `http://localhost:3000`, and the Prismic Slice Machine will be available for managing slices.
+The website will be available at `http://localhost:3000`.
 
 ## Environment Variables
 
-To access the content from Prismic, you need to set up environment variables:
+Create a `.env.local` (or `.env`) file at the project root. See `.env.example` for the full list.
 
-1. Create a `.env.local` file at the root of your project:
-    ```bash
-    touch .env.local
-    ```
+| Variable | Required | Purpose |
+|---|---|---|
+| `PRISMIC_ACCESS_TOKEN` | Yes (if API is private) | Server-only Content API token from **Settings → API & Security**. Never use `NEXT_PUBLIC_*` for this. |
+| `PRISMIC_WEBHOOK_SECRET` | Recommended in production | Must match the secret on the Prismic webhook that calls `/api/revalidate`. |
+| `NEXT_PUBLIC_PRISMIC_ENVIRONMENT` | No | Staging/environment domain. Set via `npx prismic env set <domain>` when using [Prismic Environments](https://prismic.io/docs/environments). |
 
-2. Inside the `.env.local` file, add the following environment variable:
-    ```
-    NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN=your-access-token-here
-    ```
-
-    You can find your Prismic access token in the Prismic dashboard under **Settings > API & Security**. Copy the access token and paste it into the `.env.local` file.
-
-3. For production deployment, make sure to add the `NEXT_PUBLIC_PRISMIC_ACCESS_TOKEN` environment variable in your deployment platform (such as Vercel) under the project's environment settings.
-
-4. All environment variables used in the project are listed in the `.env.example` file for reference.
+Also add `PRISMIC_ACCESS_TOKEN` (and the webhook secret) in Vercel project environment settings for production/preview.
 
 ## Scripts
 
-Here are the key scripts you can run:
-
-- **Development**:
-    ```bash
-    bun dev
-    ```
-    Runs the development server for the website and launches the Prismic Slice Machine.
-
-- **Build**:
-    ```bash
-    bun build
-    ```
-    Builds the application for production.
-
-- **Start**:
-    ```bash
-    bun start
-    ```
-    Starts the production build.
-
-- **Lint**:
-    ```bash
-    bun lint
-    ```
-    Runs ESLint to check for code issues.
-
-- **Format**:
-    ```bash
-    bun format
-    ```
-    Formats the code using [Biome](https://biomejs.dev/).
-
-- **Slice Machine**:
-    ```bash
-    bun slicemachine
-    ```
-    Starts the Prismic Slice Machine independently.
+- **Development**: `bun dev` — Next.js only.
+- **Build / Start**: `bun build` / `bun start`
+- **Lint / Format**: `bun lint` / `bun format` / `bun format:fix`
+- **Prismic models** (requires [Prismic CLI](https://prismic.io/docs/cli) login: `npx prismic login`):
+  - `bun prismic:pull` — pull models from Prismic into the repo
+  - `bun prismic:push` — push local models to Prismic
+  - `bun prismic:types` — regenerate `prismicio-types.d.ts` from local models
+  - `bun prismic:status` — show local vs remote model diffs
 
 ## Technologies Used
 
-- **[Next.js](https://nextjs.org/)**: React framework for server-side rendering and static site generation.
-- **[Bun](https://bun.sh/)**: A fast all-in-one JavaScript runtime.
-- **[TailwindCSS](https://tailwindcss.com/)**: A utility-first CSS framework for building custom designs.
-  - Example usage in the project:
-    ```jsx
-    <div className="text-center text-white bg-blue-500 p-4">
-      Welcome to TUDSaT!
-    </div>
-    ```
-  - For more details, visit the [TailwindCSS documentation](https://tailwindcss.com/docs).
-
-- **[Shadcn/ui](https://ui.shadcn.com/)**: ShadCN provides reusable and accessible UI components styled with TailwindCSS. Our basic UI building blocks are organized under the `ui` folder.
-  
-- **[Prismic](https://prismic.io/)**: A headless CMS that allows for content modeling and integration.
-  - Example usage in the project:
-    ```javascript
-    import { createClient } from '../prismicio';
-
-    const client = createClient();
-    const doc = await client.getByUID('page', 'homepage');
-    ```
-  - For more, see the [Prismic documentation](https://prismic.io/docs).
+- **[Next.js](https://nextjs.org/)**: React framework for App Router, SSR/SSG, and caching.
+- **[Bun](https://bun.sh/)**: Package manager and script runner.
+- **[TailwindCSS](https://tailwindcss.com/)**: Utility-first CSS.
+- **[Shadcn/ui](https://ui.shadcn.com/)**: Reusable UI primitives under `src/components/ui`.
+- **[Prismic](https://prismic.io/)**: Headless CMS. Content modeling uses the **Type Builder** + **Prismic CLI** (Slice Machine has been retired in this project).
 
 ## Project Structure
 
-The project follows a structured layout for better scalability and organization. Here's an overview of the key directories and files:
+- **`src/app/`**: App Router pages, layouts, and API routes (`preview`, `exit-preview`, `revalidate`, `slice-simulator`).
+- **`src/components/`**: Shared React components.
+- **`src/slices/`**: Slice React components + `model.json` files.
+- **`customtypes/`**: Page/custom type models.
+- **`prismic.config.json`**: Repository name, slice libraries, simulator URL, and route resolvers.
+- **`src/prismicio.ts`**: Prismic client factory (routes, caching, previews, access token).
+- **`prismicio-types.d.ts`**: Generated TypeScript types for models.
 
-- **`src/`**: Contains the main application code.
-  - **`app/`**: Contains the main pages, layouts, and APIs.
-    - **`[uid]/`**: Dynamic routes for Prismic documents.
-    - **`slice-simulator/`**: Related to the Slice Machine.
-    - **`globals.css`**: Global CSS styles.
-    - **`layout.tsx`**: Main layout component.
-    - **`page.tsx`**: The homepage component.
-  - **`components/`**: Contains custom React components used throughout the project.
-    - **`ui/`**: Contains reusable UI components built with [Shadcn/ui](https://ui.shadcn.com/) (e.g., button, card, dialog).
-    - **`slices/`**: Important! This is where we define Prismic slices, which are individual sections of a page. These are generated from the Prismic Slice Machine and then customized in code.
-  - **`lib/`**: Contains helper functions and utilities.
-  - **`hooks/`**: Contains custom hooks used throughout the project.
-  - **`config/`**: Configuration files for the website.
-  - **`public/`**: Static assets such as images and icons.
+## Prismic Content Modeling
 
-### Prismic & Slices
+This project uses Prismic’s [Type Builder](https://prismic.io/docs/type-builder) (cloud UI) and [Prismic CLI](https://prismic.io/docs/cli) instead of Slice Machine.
 
-This project relies heavily on Prismic's [Slice Machine](https://prismic.io/docs/technologies/slice-machine), a tool that allows you to create and manage dynamic content slices.
+### Recommended workflow (CLI-first / Git-friendly)
 
-#### Slices
+1. Log in once: `npx prismic login`
+2. Edit models locally (`customtypes/`, `src/slices/*/model.json`) or in the Type Builder.
+3. Sync:
+   - After cloud edits: `bun prismic:pull`
+   - After local edits: `bun prismic:push`
+4. Regenerate types if needed: `bun prismic:types`
+5. Implement/adjust slice UI in `src/slices/<Name>/index.tsx`.
 
-**Slices** are reusable sections of a page, allowing you to build dynamic and flexible UIs. Each slice corresponds to a section of content, such as a "hero section" or "testimonial section". In our project, slices are located in the `slices/` folder and are created using the Prismic Slice Machine.
+Prefer the CLI for branch-based work so models stay tied to Git. Use the Type Builder for inspection and quick admin edits.
 
-Slices are first added via the Slice Machine UI, then customized directly in the code.
+### Slice simulator
 
-#### Slice Machine
+Live slice previews in the Page Builder use `/slice-simulator`. Register it with:
 
-The **Slice Machine** is a UI tool integrated into our development process that allows us to create and manage slices within Prismic.
+```bash
+npx prismic preview set-simulator http://localhost:3000
+```
 
-To work with the Slice Machine, follow these steps:
+After deploy, point the simulator URL at production (e.g. `https://tudsat.space`).
 
-1. Start the Slice Machine:
-    ```bash
-    bun dev
-    ```
-2. Open the Slice Machine at `http://localhost:9999` to manage and create slices.
-3. After creating a new slice, you'll find it in the `slices/` directory. Customize its React component as needed to fit the website design.
+### Environments
 
-For more information on how to create and customize slices, refer to the [official Slice Machine documentation](https://prismic.io/docs/technologies/slice-machine).
+To fetch from a staging Prismic Environment without editing `prismic.config.json`:
+
+```bash
+npx prismic env set <staging-domain>
+# later:
+npx prismic env unset
+```
 
 ## Deployment
 
@@ -186,15 +134,20 @@ The project is continuously deployed on [Vercel](https://vercel.com/).
 - Public URL: [https://tudsat.space](https://tudsat.space)
 - After every push to the main branch, the site is automatically redeployed.
 
-For more information on how to deploy Next.js apps to Vercel, check the [official Vercel docs](https://vercel.com/docs/concepts/deployments).
+## Webhook Setup
 
-## Webhook Setup for Prismic & Vercel
+`/api/revalidate` clears the Next.js Data Cache tag `prismic` when content changes.
 
-To ensure that changes made in Prismic automatically trigger a deployment on Vercel, you will need to set up a webhook in Prismic. This is a one-time setup that connects Prismic to the deployment pipeline.
+1. In Prismic: **Settings → Webhooks**, create a webhook pointing at `https://tudsat.space/api/revalidate` (triggers: documents published/unpublished).
+2. Set a webhook secret and store the same value as `PRISMIC_WEBHOOK_SECRET` in Vercel.
+3. Optionally create the webhook via CLI:
+    ```bash
+    npx prismic webhook create https://tudsat.space/api/revalidate \
+      --trigger documentsPublished \
+      --trigger documentsUnpublished
+    ```
 
-Refer to the official [Prismic Webhooks Documentation](https://prismic.io/docs/webhooks) for detailed steps on how to create and configure the webhook with Vercel.
-
-Once configured, the website will automatically redeploy every time content is updated in Prismic.
+If you still use a Vercel Deploy Hook for full rebuilds, that can remain in addition to on-demand revalidation.
 
 ## Contribution Guidelines
 
@@ -209,7 +162,7 @@ To ensure the development environment is set up properly, it's important to inst
 ### Code Formatting with Biome
 
 We use [Biome](https://biomejs.dev/) to format the code. To maintain consistency and cleanliness in the codebase:
-- **Enable Format on Save**: 
+- **Enable Format on Save**:
     - Go to VS Code settings (`Ctrl + ,`).
     - Search for "Format on Save" and enable it. This will automatically format the code whenever you save a file.
 
