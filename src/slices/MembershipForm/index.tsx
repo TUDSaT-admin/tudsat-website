@@ -15,11 +15,11 @@ const MembershipForm = ({ slice }: MembershipFormProps) => {
     <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
       <iframe
         title="Membership Form"
-        src="https://easyverein.com/public/TUDSaT/applicationform/1979?iframe=True"
+        src="https://easyverein.com/public/TUDSaT/applicationform/29754?iframe=True"
         style={{
           border: "none",
           width: "100%",
-          minHeight: "1000px",
+          minHeight: "800px",
           height: "max-content",
         }}
       />
