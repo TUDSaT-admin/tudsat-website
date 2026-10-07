@@ -39,6 +39,7 @@ const Calendar = ({ slice }: CalendarProps) => {
     >
       <iframe
         title="Calendar"
+        loading="lazy"
         style={{
           border: "none",
         }}
