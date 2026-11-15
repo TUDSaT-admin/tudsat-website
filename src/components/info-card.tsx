@@ -14,6 +14,10 @@ export function InfoCard({
   isTransparent?: boolean;
 }) {
   const WrapperComponent = isTransparent ? "div" : Card;
+  const lines = (description ?? "")
+    .split("|")
+    .map((line) => line.trim())
+    .filter(Boolean);
   return (
     <WrapperComponent className="flex min-w-0 flex-1 items-center p-4">
       <RenderIcon
@@ -23,7 +27,14 @@ export function InfoCard({
       />
       <div className="min-w-0">
         <p className="text-sm font-medium text-muted">{title}</p>
-        <p className="text-lg">{description}</p>
+        <p className="text-lg break-words">
+          {lines.map((line, i) => (
+            <Fragment key={i}>
+              {i > 0 && <br />}
+              {line}
+            </Fragment>
+          ))}
+        </p>
       </div>
     </WrapperComponent>
   );
