@@ -16,14 +16,14 @@ const InfoHeader = ({ slice }: InfoHeaderProps) => {
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      className="flex flex-col gap-4 py-10 md:gap-12 md:py-16"
+      className="mx-auto flex w-full max-w-5xl flex-col gap-4 py-10 md:gap-12 md:py-16"
     >
-      <div className="flex flex-col p-4 md:p-0 md:flex-row prose lg:prose-xl prose-h2:text-sm dark:prose-invert md:items-center md:gap-12">
-        <div className="md:flex-1">
+      <div className="flex flex-col p-4 md:p-0 md:flex-row prose lg:prose-xl prose-h2:text-sm dark:prose-invert md:items-center md:gap-12 max-w-none">
+       <div className="md:flex-1 min-w-0">
           <h2>{slice.primary.subtext}</h2>
           <h1>{slice.primary.title}</h1>
         </div>
-        <div className="md:w-72">
+        <div className="md:w-72 shrink-0">
           <PrismicNextImage
             alt=""
             field={slice.primary.logo}
@@ -33,14 +33,10 @@ const InfoHeader = ({ slice }: InfoHeaderProps) => {
           />
         </div>
       </div>
-      <div className="flex flex-col p-4 md:p-0 md:flex-row gap-4 ">
+      {/* Grid instead of flex: 3 equal coloumns */}
+      <div className="grid grid-cols-1 gap-4 p-4 md:grid-cols-3 md:p-0">
         <InfoCard icon="userRound" description={slice.primary.lead} title="Lead" isTransparent />
-        <InfoCard
-          icon="calendar"
-          description={slice.primary.meeting}
-          title="Meeting"
-          isTransparent
-        />
+        <InfoCard icon="calendar" description={slice.primary.meeting} title="Meeting" isTransparent />
         <InfoCard icon="mail" description={slice.primary.email} title="Email" isTransparent />
       </div>
     </section>
